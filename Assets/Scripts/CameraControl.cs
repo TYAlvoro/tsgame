@@ -12,7 +12,9 @@ public class CameraControl : MonoBehaviour
     
     public float mouseSensitivity = 5f; // Debug value: 10.
 
+    // Rotation speeds.
     public float rotationSpeed = 50f;
+    public float mouseRotationSpeed = 2f;
 
     private Vector3 targetPosition; // Target position for smooth movement.
 
@@ -26,6 +28,19 @@ public class CameraControl : MonoBehaviour
         // Keyboard movement (WASD or arrow keys).
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
+        
+        MoveCamera(horizontal, vertical);
+        
+        RotateCamera();
+    }
+
+    /// <summary>
+    /// Moving camera in right way.
+    /// </summary>
+    /// <param name="horizontal">Horizontal axis for moving.</param>
+    /// <param name="vertical">Vertical axis for moving.</param>
+    private void MoveCamera(float horizontal, float vertical)
+    {
         Vector3 movement = (transform.right * horizontal + transform.forward * vertical) * moveSpeed * Time.deltaTime;
         movement.y = 0;
 
@@ -55,7 +70,13 @@ public class CameraControl : MonoBehaviour
 
         // Smooth movement to target position.
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 10f);
-
+    }
+    
+    /// <summary>
+    /// Rotate camera in right way.
+    /// </summary>
+    private void RotateCamera()
+    {
         float rotationInput = 0f;
         if (Input.GetKey(KeyCode.Q)) rotationInput = -1f;
         if (Input.GetKey(KeyCode.E)) rotationInput = 1f;
@@ -63,6 +84,15 @@ public class CameraControl : MonoBehaviour
         if (rotationInput != 0)
         {
             transform.Rotate(0f, rotationInput * rotationSpeed * Time.deltaTime, 0f, Space.World);
+        }
+
+        if (Input.GetMouseButton(2))
+        {
+            float mouseX = Input.GetAxis("Mouse X");
+            transform.Rotate(Vector3.up, mouseX * mouseRotationSpeed, Space.World);
+            
+            // Obsolete: float mouseY = Input.GetAxis("Mouse Y");
+            // Obsolete: transform.Rotate(Vector3.right, -mouseY * mouseRotationSpeed, Space.Self);
         }
     }
 }
