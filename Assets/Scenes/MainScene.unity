@@ -523,6 +523,7 @@ MonoBehaviour:
     m_Bits: 128
   maxSlopeAngle: 30
   buildingYOffset: 0.5
+  raycastInterval: 0.01
 --- !u!4 &1014781387
 Transform:
   m_ObjectHideFlags: 0

@@ -3,11 +3,7 @@
   "WorkspaceRootPath": "C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|c:\\users\\dell\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\tsgame\\.git\\tsgame\\assets\\scripts\\updateplaceholder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\updateplaceholder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|c:\\users\\dell\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\tsgame\\.git\\tsgame\\assets\\scripts\\buildingplacement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\assets\\scripts\\buildingplacement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\buildingplacement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -39,32 +35,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "UpdatePlaceholder.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\Assets\\Scripts\\UpdatePlaceholder.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\UpdatePlaceholder.cs",
-              "ToolTip": "C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\Assets\\Scripts\\UpdatePlaceholder.cs",
-              "RelativeToolTip": "Assets\\Scripts\\UpdatePlaceholder.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-19T12:54:52.88Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "BuildingPlacement.cs",
               "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\Assets\\Scripts\\BuildingPlacement.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\BuildingPlacement.cs",
               "ToolTip": "C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\Assets\\Scripts\\BuildingPlacement.cs",
               "RelativeToolTip": "Assets\\Scripts\\BuildingPlacement.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAowCQAAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGwAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-19T12:31:27.616Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "MinDrawer.cs",
               "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\Assets\\PostProcessingVolume\\PostProcessing\\Editor\\PropertyDrawers\\MinDrawer.cs",
               "RelativeDocumentMoniker": "Assets\\PostProcessingVolume\\PostProcessing\\Editor\\PropertyDrawers\\MinDrawer.cs",
@@ -76,7 +59,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "DayNightController.cs",
               "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\Assets\\Scripts\\DayNightController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\DayNightController.cs",
@@ -88,7 +71,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "CamComtrol.cs",
               "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\Assets\\Scripts\\CamComtrol.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\CamComtrol.cs",
@@ -99,7 +82,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "TerrainLit.shader",
               "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\Library\\PackageCache\\com.unity.render-pipelines.universal\\Shaders\\Terrain\\TerrainLit.shader",
               "RelativeDocumentMoniker": "Library\\PackageCache\\com.unity.render-pipelines.universal\\Shaders\\Terrain\\TerrainLit.shader",
@@ -107,7 +90,8 @@
               "RelativeToolTip": "Library\\PackageCache\\com.unity.render-pipelines.universal\\Shaders\\Terrain\\TerrainLit.shader",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002777|",
-              "WhenOpened": "2025-01-18T19:53:33.597Z"
+              "WhenOpened": "2025-01-18T19:53:33.597Z",
+              "EditorCaption": ""
             }
           ]
         }
