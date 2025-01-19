@@ -12,6 +12,8 @@ public class CameraControl : MonoBehaviour
     
     public float mouseSensitivity = 5f; // Debug value: 10.
 
+    public float rotationSpeed = 50f;
+
     private Vector3 targetPosition; // Target position for smooth movement.
 
     void Start()
@@ -24,7 +26,8 @@ public class CameraControl : MonoBehaviour
         // Keyboard movement (WASD or arrow keys).
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-        Vector3 movement = new Vector3(horizontal, 0, vertical) * moveSpeed * Time.deltaTime;
+        Vector3 movement = (transform.right * horizontal + transform.forward * vertical) * moveSpeed * Time.deltaTime;
+        movement.y = 0;
 
         // Mouse movement (right mouse button).
         if (Input.GetMouseButton(1)) // Right mouse button is held.
@@ -52,5 +55,14 @@ public class CameraControl : MonoBehaviour
 
         // Smooth movement to target position.
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 10f);
+
+        float rotationInput = 0f;
+        if (Input.GetKey(KeyCode.Q)) rotationInput = -1f;
+        if (Input.GetKey(KeyCode.E)) rotationInput = 1f;
+
+        if (rotationInput != 0)
+        {
+            transform.Rotate(0f, rotationInput * rotationSpeed * Time.deltaTime, 0f, Space.World);
+        }
     }
 }
