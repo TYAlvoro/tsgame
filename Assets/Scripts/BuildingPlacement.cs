@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI; // Для работы с UI кнопками
 
 public class SimpleBuildingPlacement : MonoBehaviour
 {
@@ -11,107 +12,139 @@ public class SimpleBuildingPlacement : MonoBehaviour
     public float buildingYOffset = 1f; // Offset for building to avoid sinking into terrain
 
     private GameObject currentPlaceholder; // Current placeholder object
-    private Renderer placeholderRenderer; // Cached renderer for placeholder
-    private Collider placeholderCollider; // Cached collider for placeholder
+    private bool isBuildingModeActive = false; // Flag to track if the building mode is active
 
-    private Terrain activeTerrain; // Cached reference to active terrain
-    private float timeSinceLastRaycast = 0f; // Time since last raycast
-    public float raycastInterval = 0.1f; // Interval between raycasts to reduce frequency
+    public Button buildButton; // Reference to the build button UI
 
     void Start()
     {
-        activeTerrain = Terrain.activeTerrain; // Cache active terrain reference at start
-        currentPlaceholder = Instantiate(placeholderPrefab);
-        placeholderRenderer = currentPlaceholder.GetComponent<Renderer>();
-        placeholderCollider = currentPlaceholder.GetComponent<Collider>();
-        SetPlaceholderActive(false); // Deactivate placeholder at the start
+        // Subscribe to the button's onClick event
+        buildButton.onClick.AddListener(ToggleBuildingMode);
     }
 
     void Update()
     {
-        timeSinceLastRaycast += Time.deltaTime;
-
-        if (timeSinceLastRaycast >= raycastInterval)
+        if (isBuildingModeActive)
         {
             UpdatePlaceholder();
-            timeSinceLastRaycast = 0f; // Reset the timer
-        }
 
-        if (Input.GetMouseButtonDown(0) && currentPlaceholder.activeSelf) // Left Click
-        {
-            if (IsPlacementValid())
+            if (Input.GetMouseButtonDown(0) && currentPlaceholder != null) // Left Click
             {
-                PlaceBuilding();
+                if (IsPlacementValid())
+                {
+                    PlaceBuilding();
+                }
+                else
+                {
+                    Debug.Log("Placement invalid!");
+                }
             }
+        }
+    }
+
+    void ToggleBuildingMode()
+    {
+        // Toggle the building mode (activate/deactivate)
+        isBuildingModeActive = !isBuildingModeActive;
+
+        if (!isBuildingModeActive && currentPlaceholder != null)
+        {
+            // Destroy the placeholder if building mode is deactivated
+            Destroy(currentPlaceholder);
         }
     }
 
     void UpdatePlaceholder()
     {
-        Ray ray = Camera.main != null ? Camera.main.ScreenPointToRay(Input.mousePosition) : default;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, terrainMask))
         {
-            SetPlaceholderActive(true);
-            currentPlaceholder.transform.position = hit.point + Vector3.up * buildingYOffset;
+            if (currentPlaceholder == null)
+            {
+                // Instantiate the placeholder object
+                currentPlaceholder = Instantiate(placeholderPrefab, hit.point, Quaternion.identity);
+
+                // Ensure the placeholder has its own material instance
+                Renderer renderer = currentPlaceholder.GetComponent<Renderer>();
+                if (renderer != null)
+                {
+                    renderer.material = new Material(renderer.material);
+                }
+            }
+            else
+            {
+                // Update the placeholder position with extra Y offset
+                currentPlaceholder.transform.position = hit.point + Vector3.up * buildingYOffset;
+            }
 
             // Check for overlaps to determine valid placement
-            placeholderRenderer.material.color = IsPlacementValid() ? Color.green : Color.red;
+            if (IsPlacementValid())
+            {
+                currentPlaceholder.GetComponent<Renderer>().material.color = Color.green; // Valid
+            }
+            else
+            {
+                currentPlaceholder.GetComponent<Renderer>().material.color = Color.red; // Invalid
+            }
         }
-        else
+        else if (currentPlaceholder != null)
         {
-            SetPlaceholderActive(false);
+            Destroy(currentPlaceholder); // Destroy placeholder if raycast misses
         }
     }
 
     bool IsPlacementValid()
     {
-        // Use OverlapBox for collision check
+        // Check for overlap using OverlapBox or other methods
         Collider[] colliders = Physics.OverlapBox(
             currentPlaceholder.transform.position,
-            placeholderCollider.bounds.extents * 0.9f, // Slightly reduced size
+            currentPlaceholder.GetComponent<Collider>().bounds.extents * 0.9f, // Reduced size for more precise check
             Quaternion.identity,
             buildingMask // Only check for other buildings within the building layer
         );
 
-        // Check for collisions with other buildings
+        // Check if there are any colliders except the placeholder itself
         foreach (Collider collider in colliders)
         {
             if (collider.gameObject != currentPlaceholder)
             {
-                return false;
+                return false; // Invalid placement
             }
         }
 
         // Check terrain slope (angle)
         Vector3 terrainNormal = GetTerrainNormal(currentPlaceholder.transform.position);
-        float angle = Vector3.Angle(terrainNormal, Vector3.up); // Calculate angle
+        float angle = Vector3.Angle(terrainNormal, Vector3.up); // Calculate the angle between the terrain normal and the vertical axis
 
-        return angle <= maxSlopeAngle; // Invalid placement if slope is too steep
+        if (angle > maxSlopeAngle) // If the slope is too steep
+        {
+            return false; // Invalid placement
+        }
+
+        return true; // Valid placement
     }
 
+    // Get the terrain normal at a given position
     Vector3 GetTerrainNormal(Vector3 position)
     {
-        if (activeTerrain != null)
+        Terrain terrain = Terrain.activeTerrain;
+        if (terrain != null)
         {
-            return activeTerrain.terrainData.GetInterpolatedNormal(
-                (position.x - activeTerrain.transform.position.x) / activeTerrain.terrainData.size.x,
-                (position.z - activeTerrain.transform.position.z) / activeTerrain.terrainData.size.z
+            Vector3 terrainNormal = terrain.terrainData.GetInterpolatedNormal(
+                (position.x - terrain.transform.position.x) / terrain.terrainData.size.x,
+                (position.z - terrain.transform.position.z) / terrain.terrainData.size.z
             );
+            return terrainNormal;
         }
         return Vector3.up; // Default to upward normal if terrain is not available
     }
 
     void PlaceBuilding()
     {
+        // Instantiate the building at the placeholder's position
         Instantiate(buildingPrefab, currentPlaceholder.transform.position, Quaternion.identity);
-    }
 
-    // Helper method to manage placeholder visibility
-    void SetPlaceholderActive(bool isActive)
-    {
-        if (currentPlaceholder.activeSelf != isActive)
-        {
-            currentPlaceholder.SetActive(isActive);
-        }
+        // Destroy the placeholder after placing the building
+        Destroy(currentPlaceholder);
     }
 }
