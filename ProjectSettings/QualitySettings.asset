@@ -74,7 +74,7 @@ QualitySettings:
     skinWeights: 4
     globalTextureMipmapLimit: 0
     textureMipmapLimitSettings: []
-    anisotropicTextures: 2
+    anisotropicTextures: 1
     antiAliasing: 0
     softParticles: 0
     softVegetation: 1
@@ -108,8 +108,8 @@ QualitySettings:
     terrainDetailDistance: 80
     terrainTreeDistance: 5000
     terrainBillboardStart: 50
-    terrainFadeLength: 5
-    terrainMaxTrees: 50
+    terrainFadeLength: 3
+    terrainMaxTrees: 0
     excludedTargetPlatforms:
     - Android
     - iPhone
