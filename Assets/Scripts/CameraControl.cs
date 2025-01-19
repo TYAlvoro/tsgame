@@ -48,11 +48,12 @@ public class CameraControl : MonoBehaviour
         if (Input.GetMouseButton(1)) // Right mouse button is held.
         {
             float mouseX = Input.GetAxis("Mouse X");
-            float mouseZ = Input.GetAxis("Mouse Y");
+            float mouseY = Input.GetAxis("Mouse Y");
             
             // Invert mouseX and mouseZ for correct direction.
-            Vector3 mouseMovement = new Vector3(-mouseX, 0, -mouseZ) * mouseSensitivity;
+            Vector3 mouseMovement = (transform.right * -mouseX + transform.forward * -mouseY) * mouseSensitivity;
             movement += mouseMovement;
+            movement.y = 0;
         }
 
         // Update target position and clamp it within limits.
