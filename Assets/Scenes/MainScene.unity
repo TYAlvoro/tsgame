@@ -274,7 +274,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -137.9, y: 0}
+  m_AnchoredPosition: {x: -233.2, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &754308628
@@ -297,7 +297,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041B\u0418\u0414\u0410 \u041A\u0410\u041C\u041D\u0418: 0"
+  m_text: "\u041A\u0430\u043C\u0435\u043D\u044C: 0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -495,7 +495,7 @@ GameObject:
   - component: {fileID: 1072699335}
   - component: {fileID: 1072699334}
   - component: {fileID: 1072699333}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MainTerrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -611,7 +611,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -316.8, y: 0}
+  m_AnchoredPosition: {x: -343.6, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1243279177
@@ -634,7 +634,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041B\u0418\u0414\u0410 \u0414\u041E\u0421\u041A\u0418: 0"
+  m_text: "\u0414\u0435\u0440\u0435\u0432\u043E: 0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
