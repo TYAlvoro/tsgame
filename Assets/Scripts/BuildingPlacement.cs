@@ -1,25 +1,37 @@
 using UnityEngine;
-using UnityEngine.UI; // Для работы с UI кнопками
+using UnityEngine.UI;
 
-public class SimpleBuildingPlacement : MonoBehaviour
+public class BuildingPlacement : MonoBehaviour
 {
-    public GameObject buildingPrefab; // The building to place
-    public GameObject placeholderPrefab; // The placeholder to show preview
-    public LayerMask terrainMask; // Terrain layer mask
-    public LayerMask buildingMask; // Mask for buildings (to avoid collision with placed buildings)
+    public GameObject[] buildingPrefabs; // Array of building prefabs
+    public Button[] buildingButtons; // Array of buttons for selecting buildings
+    public GameObject placeholderPrefab; // Placeholder prefab for preview
+    public LayerMask terrainMask; // Mask for terrain
+    public LayerMask buildingMask; // Mask for existing buildings
+    public GameObject buildingSelectionPanel; // Panel with building selection buttons
+    public Button openSelectionPanelButton; // Button to open/close the selection panel
 
-    public float maxSlopeAngle = 30f; // Maximum allowed slope angle for placement
-    public float buildingYOffset = 1f; // Offset for building to avoid sinking into terrain
+    public float maxSlopeAngle = 30f; // Maximum slope angle for placement
+    public float buildingYOffset = 1f; // Y-offset for building placement
 
     private GameObject currentPlaceholder; // Current placeholder object
-    private bool isBuildingModeActive = false; // Flag to track if the building mode is active
-
-    public Button buildButton; // Reference to the build button UI
+    private GameObject selectedBuildingPrefab; // Currently selected building prefab
+    private bool isBuildingModeActive = false; // Flag for building mode
 
     void Start()
     {
-        // Subscribe to the button's onClick event
-        buildButton.onClick.AddListener(ToggleBuildingMode);
+        // Initialize button for opening the panel
+        openSelectionPanelButton.onClick.AddListener(ToggleBuildingSelectionPanel);
+
+        // Add listeners for each building button
+        for (int i = 0; i < buildingButtons.Length; i++)
+        {
+            int index = i; // Capture index to avoid closure issues
+            buildingButtons[i].onClick.AddListener(() => SelectBuilding(index));
+        }
+
+        // Ensure the building selection panel is hidden at the start
+        buildingSelectionPanel.SetActive(false);
     }
 
     void Update()
@@ -28,7 +40,7 @@ public class SimpleBuildingPlacement : MonoBehaviour
         {
             UpdatePlaceholder();
 
-            if (Input.GetMouseButtonDown(0) && currentPlaceholder != null) // Left Click
+            if (Input.GetMouseButtonDown(0) && currentPlaceholder != null) // Left-click to place building
             {
                 if (IsPlacementValid())
                 {
@@ -42,18 +54,38 @@ public class SimpleBuildingPlacement : MonoBehaviour
         }
     }
 
-    void ToggleBuildingMode()
+    // Open or close the building selection panel
+    void ToggleBuildingSelectionPanel()
     {
-        // Toggle the building mode (activate/deactivate)
-        isBuildingModeActive = !isBuildingModeActive;
+        bool isActive = buildingSelectionPanel.activeSelf;
+        buildingSelectionPanel.SetActive(!isActive); // Toggle panel visibility
 
-        if (!isBuildingModeActive && currentPlaceholder != null)
+        if (isActive)
         {
-            // Destroy the placeholder if building mode is deactivated
-            Destroy(currentPlaceholder);
+            // Deactivate building mode and clear placeholder if panel is closed
+            isBuildingModeActive = false;
+            if (currentPlaceholder != null)
+            {
+                Destroy(currentPlaceholder);
+            }
         }
     }
 
+    // Select a building and activate building mode
+    void SelectBuilding(int index)
+    {
+        if (index >= 0 && index < buildingPrefabs.Length)
+        {
+            selectedBuildingPrefab = buildingPrefabs[index]; // Set the selected building prefab
+            isBuildingModeActive = true; // Activate building mode
+            Debug.Log("Building selected: " + selectedBuildingPrefab.name);
+
+            // Hide the selection panel after selecting a building
+            buildingSelectionPanel.SetActive(false);
+        }
+    }
+
+    // Update the placeholder position and validity
     void UpdatePlaceholder()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -61,70 +93,66 @@ public class SimpleBuildingPlacement : MonoBehaviour
         {
             if (currentPlaceholder == null)
             {
-                // Instantiate the placeholder object
+                // Create the placeholder
                 currentPlaceholder = Instantiate(placeholderPrefab, hit.point, Quaternion.identity);
-
-                // Ensure the placeholder has its own material instance
                 Renderer renderer = currentPlaceholder.GetComponent<Renderer>();
                 if (renderer != null)
                 {
-                    renderer.material = new Material(renderer.material);
+                    renderer.material = new Material(renderer.material); // Ensure material instance
                 }
             }
             else
             {
-                // Update the placeholder position with extra Y offset
+                // Update placeholder position
                 currentPlaceholder.transform.position = hit.point + Vector3.up * buildingYOffset;
             }
 
-            // Check for overlaps to determine valid placement
+            // Update placeholder color based on placement validity
             if (IsPlacementValid())
             {
-                currentPlaceholder.GetComponent<Renderer>().material.color = Color.green; // Valid
+                currentPlaceholder.GetComponent<Renderer>().material.color = Color.green; // Valid placement
             }
             else
             {
-                currentPlaceholder.GetComponent<Renderer>().material.color = Color.red; // Invalid
+                currentPlaceholder.GetComponent<Renderer>().material.color = Color.red; // Invalid placement
             }
         }
         else if (currentPlaceholder != null)
         {
-            Destroy(currentPlaceholder); // Destroy placeholder if raycast misses
+            Destroy(currentPlaceholder); // Remove placeholder if raycast misses
         }
     }
 
+    // Check if the placement is valid
     bool IsPlacementValid()
     {
-        // Check for overlap using OverlapBox or other methods
         Collider[] colliders = Physics.OverlapBox(
             currentPlaceholder.transform.position,
-            currentPlaceholder.GetComponent<Collider>().bounds.extents * 0.9f, // Reduced size for more precise check
+            currentPlaceholder.GetComponent<Collider>().bounds.extents * 0.9f,
             Quaternion.identity,
-            buildingMask // Only check for other buildings within the building layer
+            buildingMask
         );
 
-        // Check if there are any colliders except the placeholder itself
         foreach (Collider collider in colliders)
         {
             if (collider.gameObject != currentPlaceholder)
             {
-                return false; // Invalid placement
+                return false; // Placement invalid due to collision
             }
         }
 
-        // Check terrain slope (angle)
         Vector3 terrainNormal = GetTerrainNormal(currentPlaceholder.transform.position);
-        float angle = Vector3.Angle(terrainNormal, Vector3.up); // Calculate the angle between the terrain normal and the vertical axis
+        float angle = Vector3.Angle(terrainNormal, Vector3.up);
 
-        if (angle > maxSlopeAngle) // If the slope is too steep
+        if (angle > maxSlopeAngle)
         {
-            return false; // Invalid placement
+            return false; // Placement invalid due to slope
         }
 
-        return true; // Valid placement
+        return true; // Placement is valid
     }
 
-    // Get the terrain normal at a given position
+    // Get the terrain normal at a position
     Vector3 GetTerrainNormal(Vector3 position)
     {
         Terrain terrain = Terrain.activeTerrain;
@@ -136,15 +164,14 @@ public class SimpleBuildingPlacement : MonoBehaviour
             );
             return terrainNormal;
         }
-        return Vector3.up; // Default to upward normal if terrain is not available
+        return Vector3.up; // Default to upward normal
     }
 
+    // Place the building at the placeholder's position
     void PlaceBuilding()
     {
-        // Instantiate the building at the placeholder's position
-        Instantiate(buildingPrefab, currentPlaceholder.transform.position, Quaternion.identity);
-
-        // Destroy the placeholder after placing the building
-        Destroy(currentPlaceholder);
+        Instantiate(selectedBuildingPrefab, currentPlaceholder.transform.position, Quaternion.identity); // Place building
+        Destroy(currentPlaceholder); // Destroy the placeholder
+        isBuildingModeActive = false; // Exit building mode
     }
 }
