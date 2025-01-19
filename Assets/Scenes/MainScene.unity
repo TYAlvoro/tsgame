@@ -221,8 +221,8 @@ Transform:
   m_GameObject: {fileID: 1002190603}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 0.5, z: 91.84}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 247.5, y: 5, z: 217.4}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -314,7 +314,7 @@ Transform:
   m_GameObject: {fileID: 1072699332}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -255, y: 0, z: -134.2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -529,7 +529,7 @@ Transform:
   m_GameObject: {fileID: 1837476101}
   serializedVersion: 2
   m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 3.9, z: 87.7}
+  m_LocalPosition: {x: 110, y: 110, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -591,10 +591,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e52a145c51fe2064499d22299eaabbf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  scrollSpeed: 2
-  minHeight: 20
-  maxHeight: 100
+  moveSpeed: 50
+  scrollSpeed: 0.4
+  minX: -20
+  maxX: 480
+  minY: 20
+  maxY: 250
+  minZ: -70
+  maxZ: 450
+  mouseSensitivity: 5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
