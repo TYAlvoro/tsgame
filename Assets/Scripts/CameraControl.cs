@@ -10,43 +10,89 @@ public class CameraControl : MonoBehaviour
     public float minY = 20f, maxY = 250f;
     public float minZ = -70f, maxZ = 450f;
     
-    public float mouseSensitivity = 5f;
+    public float mouseSensitivity = 5f; // Debug value: 10.
+
+    // Rotation speeds.
+    public float rotationSpeed = 50f;
+    public float mouseRotationSpeed = 2f;
+
+    private Vector3 targetPosition; // Target position for smooth movement.
+
+    void Start()
+    {
+        targetPosition = transform.position; // Initialize target position.
+    }
 
     void Update()
     {
-        // Horizontal moving.
+        // Keyboard movement (WASD or arrow keys).
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-        Vector3 movement = new Vector3(horizontal, 0, vertical) * moveSpeed * Time.deltaTime;
-        transform.Translate(movement, Space.World);
+        
+        MoveCamera(horizontal, vertical);
+        
+        RotateCamera();
+    }
 
-        //  Moving side and forward by mouse.
-        if (Input.GetMouseButton(1))
+    /// <summary>
+    /// Moving camera in right way.
+    /// </summary>
+    /// <param name="horizontal">Horizontal axis for moving.</param>
+    /// <param name="vertical">Vertical axis for moving.</param>
+    private void MoveCamera(float horizontal, float vertical)
+    {
+        Vector3 movement = (transform.right * horizontal + transform.forward * vertical) * moveSpeed * Time.deltaTime;
+        movement.y = 0;
+
+        // Mouse movement (right mouse button).
+        if (Input.GetMouseButton(1)) // Right mouse button is held.
         {
             float mouseX = Input.GetAxis("Mouse X");
             float mouseZ = Input.GetAxis("Mouse Y");
             
-            // Inverting mouseX and mouseZ for right movement.
+            // Invert mouseX and mouseZ for correct direction.
             Vector3 mouseMovement = new Vector3(-mouseX, 0, -mouseZ) * mouseSensitivity;
-            transform.Translate(mouseMovement, Space.World);
+            movement += mouseMovement;
         }
 
-        // Clamping X and Z.
-        Vector3 position = transform.position;
-        position.x = Mathf.Clamp(position.x, minX, maxX);
-        position.z = Mathf.Clamp(position.z, minZ, maxZ);
+        // Update target position and clamp it within limits.
+        targetPosition += movement;
+        targetPosition.x = Mathf.Clamp(targetPosition.x, minX, maxX); // Clamp X-axis.
+        targetPosition.z = Mathf.Clamp(targetPosition.z, minZ, maxZ); // Clamp Z-axis.
 
-        // Y Mouse Scrolling.
+        // Mouse scroll for height adjustment.
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         if (scroll != 0)
         {
-            position.y -= scroll * scrollSpeed * 100f;
+            targetPosition.y -= scroll * scrollSpeed * 100f;
+            targetPosition.y = Mathf.Clamp(targetPosition.y, minY, maxY); // Clamp Y-axis.
         }
 
-        // Clamping Y.
-        position.y = Mathf.Clamp(position.y, minY, maxY);
+        // Smooth movement to target position.
+        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 10f);
+    }
+    
+    /// <summary>
+    /// Rotate camera in right way.
+    /// </summary>
+    private void RotateCamera()
+    {
+        float rotationInput = 0f;
+        if (Input.GetKey(KeyCode.Q)) rotationInput = -1f;
+        if (Input.GetKey(KeyCode.E)) rotationInput = 1f;
 
-        // Transforming.
-        transform.position = position;
+        if (rotationInput != 0)
+        {
+            transform.Rotate(0f, rotationInput * rotationSpeed * Time.deltaTime, 0f, Space.World);
+        }
+
+        if (Input.GetMouseButton(2))
+        {
+            float mouseX = Input.GetAxis("Mouse X");
+            transform.Rotate(Vector3.up, mouseX * mouseRotationSpeed, Space.World);
+            
+            // Obsolete: float mouseY = Input.GetAxis("Mouse Y");
+            // Obsolete: transform.Rotate(Vector3.right, -mouseY * mouseRotationSpeed, Space.Self);
+        }
     }
 }
