@@ -518,6 +518,11 @@ MonoBehaviour:
   terrainMask:
     serializedVersion: 2
     m_Bits: 64
+  buildingMask:
+    serializedVersion: 2
+    m_Bits: 128
+  maxSlopeAngle: 30
+  buildingYOffset: 0.5
 --- !u!4 &1014781387
 Transform:
   m_ObjectHideFlags: 0
@@ -566,7 +571,7 @@ TerrainCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_ProvidesContacts: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
   m_TerrainData: {fileID: 15600000, guid: 667a976eed2876c4e8847e19044e2f89, type: 2}
