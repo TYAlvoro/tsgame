@@ -9,6 +9,8 @@ public class CameraControl : MonoBehaviour
     public float minX = -20f, maxX = 480f;
     public float minY = 20f, maxY = 250f;
     public float minZ = -70f, maxZ = 450f;
+    
+    public float mouseSensitivity = 5f;
 
     void Update()
     {
@@ -17,6 +19,17 @@ public class CameraControl : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
         Vector3 movement = new Vector3(horizontal, 0, vertical) * moveSpeed * Time.deltaTime;
         transform.Translate(movement, Space.World);
+
+        //  Moving side and forward by mouse.
+        if (Input.GetMouseButton(1))
+        {
+            float mouseX = Input.GetAxis("Mouse X");
+            float mouseZ = Input.GetAxis("Mouse Y");
+            
+            // Inverting mouseX and mouseZ for right movement.
+            Vector3 mouseMovement = new Vector3(-mouseX, 0, -mouseZ) * mouseSensitivity;
+            transform.Translate(mouseMovement, Space.World);
+        }
 
         // Clamping X and Z.
         Vector3 position = transform.position;
