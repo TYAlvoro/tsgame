@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +19,9 @@ public class BuildingPlacement : MonoBehaviour
     private GameObject currentPlaceholder; // Active placeholder object
     private GameObject selectedBuildingPrefab; // Currently selected building prefab
     private bool isBuildingModeActive = false; // Flag to track building mode
+
+    private Queue<GameObject> buildingQueue = new Queue<GameObject>(); // Building Queue
+    [SerializeField] private Text buildingQueueText; // The text to display the queue
 
     private void Start()
     {
@@ -40,11 +45,12 @@ public class BuildingPlacement : MonoBehaviour
         {
             UpdatePlaceholder();
 
-            if (Input.GetMouseButtonDown(0) && currentPlaceholder != null) // Place building on left-click
+            if (Input.GetMouseButtonDown(0) && currentPlaceholder != null)
             {
                 if (IsPlacementValid())
                 {
                     PlaceBuilding();
+                    UpdateQueueText(); // Updating queue information
                 }
                 else
                 {
@@ -53,6 +59,29 @@ public class BuildingPlacement : MonoBehaviour
             }
         }
     }
+
+
+    private void UpdateQueueText()
+    {
+        // Debugging queue state
+        Debug.Log($"Queue count: {buildingQueue.Count}");
+
+        if (buildingQueue.Count > 0)
+        {
+            buildingQueueText.text = $"Next building: {buildingQueue.Peek().name}"; // Show the next building in the queue
+        }
+        else
+        {
+            buildingQueueText.text = "No buildings in the queue";
+        }
+    }
+
+    public void ClearBuildingQueue()
+    {
+        buildingQueue.Clear(); // Clearing the queue
+        Debug.Log("Building queue cleared.");
+    }
+
 
     /// <summary>
     /// Toggles the visibility of the building selection panel.
@@ -91,11 +120,39 @@ public class BuildingPlacement : MonoBehaviour
         if (index >= 0 && index < buildingPrefabs.Length)
         {
             selectedBuildingPrefab = buildingPrefabs[index];
-            isBuildingModeActive = true;
+            buildingQueue.Enqueue(selectedBuildingPrefab); // Add the building to the queue
+            Debug.Log($"Building added to queue: {selectedBuildingPrefab.name}");
+
+            // Immediately update the queue text
+            UpdateQueueText();
+
+            // If building mode is not active, start building the first item in the queue
+            if (!isBuildingModeActive && buildingQueue.Count > 0)
+            {
+                StartNextBuilding(); // Start the first building
+            }
+
             Debug.Log($"Building selected: {selectedBuildingPrefab.name}");
             buildingSelectionPanel.SetActive(false);
         }
     }
+
+    private void StartNextBuilding()
+    {
+        if (buildingQueue.Count > 0) // If there are buildings in the queue
+        {
+            GameObject buildingToBuild = buildingQueue.Peek(); // Look at the first building in the queue, but don't remove it yet
+            selectedBuildingPrefab = buildingToBuild; // Set it as the selected building
+            isBuildingModeActive = true; // Activate building mode
+            Debug.Log($"Building {selectedBuildingPrefab.name} is starting.");
+        }
+        else
+        {
+            Debug.Log("No more buildings in the queue.");
+        }
+    }
+
+
 
     /// <summary>
     /// Updates the position and validity of the placeholder object.
@@ -189,8 +246,31 @@ public class BuildingPlacement : MonoBehaviour
     /// </summary>
     private void PlaceBuilding()
     {
-        Instantiate(selectedBuildingPrefab, currentPlaceholder.transform.position, Quaternion.identity);
-        Destroy(currentPlaceholder);
-        isBuildingModeActive = false;
+        StartCoroutine(PlaceBuildingWithDelay(currentPlaceholder.transform.position)); // Pass the position of the placeholder to the coroutine
+        Destroy(currentPlaceholder); // Remove the placeholder immediately when building starts
+        isBuildingModeActive = false; // Deactivate building mode
     }
+
+    private IEnumerator PlaceBuildingWithDelay(Vector3 placementPosition)
+    {
+        // Add a small delay to simulate construction time
+        yield return new WaitForSeconds(5f);
+
+        // Place the building at the saved position of the placeholder
+        Instantiate(selectedBuildingPrefab, placementPosition, Quaternion.identity);
+        Debug.Log($"Building placed at: {placementPosition}");
+
+        // Remove the building from the queue now that it has been placed
+        buildingQueue.Dequeue(); // Remove the building from the queue only after placement
+
+        // Update the queue text after the building is placed
+        UpdateQueueText();
+
+        // Start the next building
+        StartNextBuilding();
+    }
+
+
+
+
 }
