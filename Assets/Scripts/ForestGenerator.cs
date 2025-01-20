@@ -37,6 +37,12 @@ public class ForestGenerator : MonoBehaviour
                 position.y = terrain.SampleHeight(position); // Adjust height to terrain.
                 GameObject tree = Instantiate(treePrefab, position, Quaternion.identity, transform);
                 tree.transform.localScale = GetRandomScale(); // Randomize scale.
+                
+                // Obsolete.
+                if (tree.GetComponent<Collider>() == null)
+                {
+                    Debug.LogError($"Tree at {position} is missing a collider!");
+                }
             }
             else
             {
