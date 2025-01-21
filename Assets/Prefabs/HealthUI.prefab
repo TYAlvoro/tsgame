@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 991715821935467824}
   - component: {fileID: 3674073231348338478}
-  - component: {fileID: 6645794804154737048}
   m_Layer: 5
   m_Name: HealthUI
   m_TagString: Untagged
@@ -46,22 +45,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11c2a45826d01634482e2762991f16e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthSlider: {fileID: 1234943096643974763}
-  canvasGroup: {fileID: 6645794804154737048}
-  scaleFactor: 0.1
-  size: {x: 100, y: 10}
---- !u!225 &6645794804154737048
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 265510159275849467}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 0
-  m_IgnoreParentGroups: 0
+  _healthSlider: {fileID: 1234943096643974763}
+  _canvasGroup: {fileID: 4971162842079759971}
+  _scaleCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -0.5
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0.5
+      inSlope: -0.5
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1773220947146946552
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,7 +307,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

@@ -191,7 +191,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4646741142873419579}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c0471adcbb36f541a33d38f780b69aa, type: 3}
+  m_Script: {fileID: 11500000, guid: 1dd55c45c127b3d4bb614bc6ebb25b6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  config: {fileID: 11400000, guid: 93b11ea44fee2344480ee405bcc077cc, type: 2}
+  _settings:
+    maxHealth: 100
+    uiOffset: {x: 0, y: 2, z: 0}
+    uiVisibilityDistance: 150
+    uiScale: 0.05

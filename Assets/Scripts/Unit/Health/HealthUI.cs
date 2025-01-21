@@ -1,98 +1,77 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Visual representation of health status with dynamic scaling
+/// </summary>
 public class HealthUI : MonoBehaviour
 {
-    [Header("References")]
-    [SerializeField] private Slider healthSlider;
-    [SerializeField] private CanvasGroup canvasGroup;
+    [Header("UI Components")]
+    [SerializeField] private Slider _healthSlider;
+    [SerializeField] private CanvasGroup _canvasGroup;
 
-    [Header("Settings")]
-    [SerializeField] private float scaleFactor = 0.005f;
-    [SerializeField] private Vector2 size = new Vector2(200, 20);
+    [Header("Scaling Configuration")]
+    [SerializeField]
+    private AnimationCurve _scaleCurve =
+        AnimationCurve.Linear(0, 1, 1, 0.5f);
 
-    private RectTransform rectTransform;
-    private Transform target;
-    private Camera mainCamera;
-    private Vector3 positionOffset;
-    private float maxViewDistance;
+    private HealthSystem _healthSystem;
+    private Camera _mainCamera;
+    private Transform _target;
+    private float _visibilityDistance;
+    private float _baseScale;
 
-    public void Initialize(Transform targetTransform, Camera camera,
-                         Vector3 offset, float visibilityDistance)
+    /// <summary>
+    /// Initializes healthbar with specific entity parameters
+    /// </summary>
+    public void Initialize(HealthSystem healthSystem, Camera mainCamera)
     {
-        rectTransform = GetComponent<RectTransform>();
-        target = targetTransform;
-        mainCamera = camera;
-        positionOffset = offset;
-        maxViewDistance = visibilityDistance;
+        _healthSystem = healthSystem;
+        _mainCamera = mainCamera;
+        _target = healthSystem.transform;
 
-        ConfigureCanvas();
-        RegisterEvents();
-        UpdateTransform();
+        var settings = _healthSystem.GetSettings();
+        transform.localScale = Vector3.one * settings.uiScale;
+        _visibilityDistance = settings.uiVisibilityDistance;
+        _baseScale = settings.uiScale;
+
+        gameObject.SetActive(true);
     }
 
-    private void ConfigureCanvas()
+    /// <summary>
+    /// Updates all visual aspects of healthbar
+    /// </summary>
+    public void UpdateUI()
     {
-        var canvas = GetComponent<Canvas>();
-        canvas.renderMode = RenderMode.WorldSpace;
-        canvas.worldCamera = mainCamera;
+        if (_target == null || _healthSystem == null) return;
 
-        // Критически важные настройки
-        RectTransform rt = GetComponent<RectTransform>();
-        rt.anchorMin = new Vector2(0.5f, 0.5f);
-        rt.anchorMax = new Vector2(0.5f, 0.5f);
-        rt.pivot = new Vector2(0.5f, 0.5f);
-        rt.sizeDelta = new Vector2(200, 20); // Ширина x Высота
-
-        transform.localScale = Vector3.one * scaleFactor;
+        UpdatePosition();
+        UpdateRotation();
+        UpdateVisibilityState();
+        CalculateDynamicScale();
     }
 
-    private void RegisterEvents()
+    private void UpdatePosition()
     {
-        HealthEventSystem.OnHealthChanged.AddListener(OnHealthUpdate);
-        HealthEventSystem.OnDeath.AddListener(OnTargetDeath);
+        transform.position = _target.position + _healthSystem.GetSettings().uiOffset;
     }
 
-    private void OnHealthUpdate(GameObject obj, float current, float max)
+    private void UpdateRotation()
     {
-        if (obj != target.gameObject) return;
-        healthSlider.value = Mathf.Clamp01(current / max);
+        transform.rotation = _mainCamera.transform.rotation;
     }
 
-    private void OnTargetDeath(GameObject obj)
+    private void UpdateVisibilityState()
     {
-        if (obj == target.gameObject) Destroy(gameObject);
+        float distance = Vector3.Distance(_mainCamera.transform.position, _target.position);
+        _canvasGroup.alpha = distance <= _visibilityDistance ? 1 : 0;
     }
 
-    private void LateUpdate() => UpdateTransform();
-
-    private void UpdateTransform()
+    private void CalculateDynamicScale()
     {
-        if (target == null) return;
-
-        transform.position = target.position + positionOffset;
-        transform.rotation = mainCamera.transform.rotation;
-
-        UpdateVisibility();
-    }
-
-    private void UpdateVisibility()
-    {
-        if (mainCamera == null) return;
-
-        float distance = Vector3.Distance(
-            mainCamera.transform.position,
-            target.position
-        );
-
-        canvasGroup.alpha = distance <= maxViewDistance ? 1 : 0;
-        float distanceScaleModifier = Mathf.Clamp(1 - (distance / maxViewDistance), 0.5f, 1f);
-        transform.localScale = Vector3.one * scaleFactor * distanceScaleModifier;
-    }
-
-    private void OnDestroy()
-    {
-        HealthEventSystem.OnHealthChanged.RemoveListener(OnHealthUpdate);
-        HealthEventSystem.OnDeath.RemoveListener(OnTargetDeath);
+        float distance = Vector3.Distance(_mainCamera.transform.position, _target.position);
+        float normalizedDistance = Mathf.Clamp01(distance / _visibilityDistance);
+        float scaleModifier = _scaleCurve.Evaluate(normalizedDistance);
+        transform.localScale = Vector3.one * _baseScale * scaleModifier;
     }
 }
