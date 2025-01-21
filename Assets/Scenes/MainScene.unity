@@ -3443,8 +3443,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16ab771aac4674361ba0aa0e25f2a5da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cutInterval: 3
-  stonesPerInterval: 10
   quarryRoot: {fileID: 1708554260}
   stoneCounterText: {fileID: 754308628}
 --- !u!4 &105391055
@@ -98573,8 +98571,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec9f6a8db75e74a33ad582778e223f1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cutInterval: 5
-  treesPerInterval: 3
   forestRoot: {fileID: 1591960370}
   treeCounterText: {fileID: 1243279177}
 --- !u!4 &2085576838
