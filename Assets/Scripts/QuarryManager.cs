@@ -4,9 +4,7 @@ using UnityEngine;
 using TMPro;
 
 public class QuarryManager : MonoBehaviour
-{
-    public float cutInterval = 5f; // Interval between quarry extractions (seconds).
-    public int stonesPerInterval = 3; // Number of stones removed per interval.
+{ 
     public GameObject quarryRoot; // Parent object containing all quarries.
     public TMP_Text stoneCounterText; // Optional: UI element for displaying stone count.
 
@@ -22,53 +20,6 @@ public class QuarryManager : MonoBehaviour
             {
                 quarryList.Add(child.gameObject);
             }
-        }
-
-        // Start the gradual stone extraction process.
-        StartCoroutine(GradualStoneExtraction());
-    }
-
-    /// <summary>
-    /// Gradually removes stones from the quarry at specified intervals.
-    /// </summary>
-    private IEnumerator GradualStoneExtraction()
-    {
-        while (quarryList.Count > 0)
-        {
-            // Remove the specified number of stones per interval.
-            for (int i = 0; i < stonesPerInterval; i++)
-            {
-                if (quarryList.Count > 0)
-                {
-                    RemoveRandomStone();
-                }
-            }
-
-            // Wait for the next interval.
-            yield return new WaitForSeconds(cutInterval);
-        }
-    }
-
-    /// <summary>
-    /// Removes a random stone from the quarry.
-    /// </summary>
-    private void RemoveRandomStone()
-    {
-        if (quarryList.Count == 0) return;
-
-        // Choose a random stone from the list.
-        int randomIndex = Random.Range(0, quarryList.Count);
-        GameObject stoneToRemove = quarryList[randomIndex];
-
-        // Remove the stone from the list and the scene.
-        quarryList.RemoveAt(randomIndex);
-        Destroy(stoneToRemove);
-
-        // Update the stone extraction counter and UI.
-        stonesExtracted++;
-        if (stoneCounterText != null)
-        {
-            stoneCounterText.text = $"Камень: {stonesExtracted}";
         }
     }
 
@@ -93,6 +44,59 @@ public class QuarryManager : MonoBehaviour
 
         // Reset counters and update UI.
         stonesExtracted = 0;
+        if (stoneCounterText != null)
+        {
+            stoneCounterText.text = $"Камень: {stonesExtracted}";
+        }
+    }
+    
+    public Transform GetNearestQuarry(Vector3 position)
+    {
+        if (quarryList.Count == 0)
+        {
+            Debug.Log("QuarryManager: No quarries left.");
+            return null;
+        }
+
+        GameObject nearestQuarry = null;
+        float minDistance = float.MaxValue;
+
+        foreach (GameObject quarry in quarryList)
+        {
+            float distance = Vector3.Distance(position, quarry.transform.position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                nearestQuarry = quarry;
+            }
+        }
+
+        Debug.Log($"QuarryManager: Nearest quarry found at distance {minDistance}.");
+        return nearestQuarry?.transform;
+    }
+
+    public void RemoveNearestStone(Vector3 position)
+    {
+        Transform nearestQuarry = GetNearestQuarry(position);
+        if (nearestQuarry != null)
+        {
+            Debug.Log($"QuarryManager: Removing stone at {nearestQuarry.position}.");
+            quarryList.Remove(nearestQuarry.gameObject);
+            Destroy(nearestQuarry.gameObject);
+        }
+    }
+
+    public bool HasStones()
+    {
+        bool hasStones = quarryList.Count > 0;
+        Debug.Log($"QuarryManager: Stones available? {hasStones}");
+        return hasStones;
+    }
+    
+    public void AddResource()
+    {
+        stonesExtracted++;
+        Debug.Log($"QuarryManager: Stone delivered. Total stones processed: {stonesExtracted}");
         if (stoneCounterText != null)
         {
             stoneCounterText.text = $"Камень: {stonesExtracted}";

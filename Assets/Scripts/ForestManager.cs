@@ -5,8 +5,6 @@ using TMPro;
 
 public class ForestManager : MonoBehaviour
 {
-    public float cutInterval = 5f; // Interval between tree removals (seconds).
-    public int treesPerInterval = 3; // Number of trees removed per interval.
     public GameObject forestRoot; // Parent object containing all trees.
     public TMP_Text treeCounterText; // Optional: UI element for displaying tree count.
 
@@ -23,53 +21,6 @@ public class ForestManager : MonoBehaviour
                 treeList.Add(child.gameObject);
             }
         }
-
-        // Start the tree removal process.
-        StartCoroutine(GradualTreeRemoval());
-    }
-
-    /// <summary>
-    /// Gradually removes trees from the forest at specified intervals.
-    /// </summary>
-    private IEnumerator GradualTreeRemoval()
-    {
-        while (treeList.Count > 0)
-        {
-            // Remove the specified number of trees per interval.
-            for (int i = 0; i < treesPerInterval; i++)
-            {
-                if (treeList.Count > 0)
-                {
-                    RemoveRandomTree();
-                }
-            }
-
-            // Wait for the next interval.
-            yield return new WaitForSeconds(cutInterval);
-        }
-    }
-
-    /// <summary>
-    /// Removes a random tree from the forest.
-    /// </summary>
-    private void RemoveRandomTree()
-    {
-        if (treeList.Count == 0) return;
-
-        // Choose a random tree from the list.
-        int randomIndex = Random.Range(0, treeList.Count);
-        GameObject treeToRemove = treeList[randomIndex];
-
-        // Remove the tree from the list and the scene.
-        treeList.RemoveAt(randomIndex);
-        Destroy(treeToRemove);
-
-        // Update the tree removal counter and UI.
-        treesRemoved++;
-        if (treeCounterText != null)
-        {
-            treeCounterText.text = $"Дерево: {treesRemoved}";
-        }
     }
 
     /// <summary>
@@ -82,6 +33,7 @@ public class ForestManager : MonoBehaviour
         {
             Destroy(tree);
         }
+
         treeList.Clear();
 
         // Reinitialize the forest with the original trees.
@@ -93,6 +45,59 @@ public class ForestManager : MonoBehaviour
 
         // Reset counters and update UI.
         treesRemoved = 0;
+        if (treeCounterText != null)
+        {
+            treeCounterText.text = $"Дерево: {treesRemoved}";
+        }
+    }
+
+    public Transform GetNearestTree(Vector3 position)
+    {
+        if (treeList.Count == 0)
+        {
+            Debug.Log("ForestManager: No trees left.");
+            return null;
+        }
+
+        GameObject nearestTree = null;
+        float minDistance = float.MaxValue;
+
+        foreach (GameObject tree in treeList)
+        {
+            float distance = Vector3.Distance(position, tree.transform.position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                nearestTree = tree;
+            }
+        }
+
+        Debug.Log($"ForestManager: Nearest tree found at distance {minDistance}.");
+        return nearestTree?.transform;
+    }
+
+    public void RemoveNearestTree(Vector3 position)
+    {
+        Transform nearestTree = GetNearestTree(position);
+        if (nearestTree != null)
+        {
+            Debug.Log($"ForestManager: Removing tree at {nearestTree.position}.");
+            treeList.Remove(nearestTree.gameObject);
+            Destroy(nearestTree.gameObject);
+        }
+    }
+
+    public bool HasTrees()
+    {
+        bool hasTrees = treeList.Count > 0;
+        Debug.Log($"ForestManager: Trees available? {hasTrees}");
+        return hasTrees;
+    }
+
+    public void AddResource()
+    {
+        treesRemoved++;
+        Debug.Log($"ForestManager: Tree delivered. Total trees processed: {treesRemoved}");
         if (treeCounterText != null)
         {
             treeCounterText.text = $"Дерево: {treesRemoved}";
