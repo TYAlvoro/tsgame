@@ -8333,7 +8333,11 @@ MonoBehaviour:
   factory: {fileID: 378881334}
   forestManager: {fileID: 2085576837}
   quarryManager: {fileID: 105391054}
+  productCounterText: {fileID: 674295716}
+  stoneCounterText: {fileID: 754308628}
+  treeCounterText: {fileID: 1243279177}
   waitTime: 3
+  conversionDelay: 2
 --- !u!1 &239722002
 GameObject:
   m_ObjectHideFlags: 0
