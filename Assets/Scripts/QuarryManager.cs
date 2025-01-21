@@ -92,11 +92,14 @@ public class QuarryManager : MonoBehaviour
         Debug.Log($"QuarryManager: Stones available? {hasStones}");
         return hasStones;
     }
-
+    
     public void AddResource()
     {
-        Debug.Log("QuarryManager: Resource added.");
+        stonesExtracted++;
+        Debug.Log($"QuarryManager: Stone delivered. Total stones processed: {stonesExtracted}");
+        if (stoneCounterText != null)
+        {
+            stoneCounterText.text = $"Камень: {stonesExtracted}";
+        }
     }
-
-
 }

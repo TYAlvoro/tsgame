@@ -22,7 +22,7 @@ public class ForestManager : MonoBehaviour
             }
         }
     }
-    
+
     /// <summary>
     /// Resets the forest to its initial state.
     /// </summary>
@@ -33,6 +33,7 @@ public class ForestManager : MonoBehaviour
         {
             Destroy(tree);
         }
+
         treeList.Clear();
 
         // Reinitialize the forest with the original trees.
@@ -49,7 +50,7 @@ public class ForestManager : MonoBehaviour
             treeCounterText.text = $"Дерево: {treesRemoved}";
         }
     }
-    
+
     public Transform GetNearestTree(Vector3 position)
     {
         if (treeList.Count == 0)
@@ -95,7 +96,11 @@ public class ForestManager : MonoBehaviour
 
     public void AddResource()
     {
-        Debug.Log("ForestManager: Resource added.");
+        treesRemoved++;
+        Debug.Log($"ForestManager: Tree delivered. Total trees processed: {treesRemoved}");
+        if (treeCounterText != null)
+        {
+            treeCounterText.text = $"Дерево: {treesRemoved}";
+        }
     }
-
 }
