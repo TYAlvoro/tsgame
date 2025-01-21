@@ -5,8 +5,6 @@ using TMPro;
 
 public class ForestManager : MonoBehaviour
 {
-    public float cutInterval = 5f; // Interval between tree removals (seconds).
-    public int treesPerInterval = 3; // Number of trees removed per interval.
     public GameObject forestRoot; // Parent object containing all trees.
     public TMP_Text treeCounterText; // Optional: UI element for displaying tree count.
 
@@ -23,55 +21,8 @@ public class ForestManager : MonoBehaviour
                 treeList.Add(child.gameObject);
             }
         }
-
-        // Start the tree removal process.
-        StartCoroutine(GradualTreeRemoval());
     }
-
-    /// <summary>
-    /// Gradually removes trees from the forest at specified intervals.
-    /// </summary>
-    private IEnumerator GradualTreeRemoval()
-    {
-        while (treeList.Count > 0)
-        {
-            // Remove the specified number of trees per interval.
-            for (int i = 0; i < treesPerInterval; i++)
-            {
-                if (treeList.Count > 0)
-                {
-                    RemoveRandomTree();
-                }
-            }
-
-            // Wait for the next interval.
-            yield return new WaitForSeconds(cutInterval);
-        }
-    }
-
-    /// <summary>
-    /// Removes a random tree from the forest.
-    /// </summary>
-    private void RemoveRandomTree()
-    {
-        if (treeList.Count == 0) return;
-
-        // Choose a random tree from the list.
-        int randomIndex = Random.Range(0, treeList.Count);
-        GameObject treeToRemove = treeList[randomIndex];
-
-        // Remove the tree from the list and the scene.
-        treeList.RemoveAt(randomIndex);
-        Destroy(treeToRemove);
-
-        // Update the tree removal counter and UI.
-        treesRemoved++;
-        if (treeCounterText != null)
-        {
-            treeCounterText.text = $"Дерево: {treesRemoved}";
-        }
-    }
-
+    
     /// <summary>
     /// Resets the forest to its initial state.
     /// </summary>
