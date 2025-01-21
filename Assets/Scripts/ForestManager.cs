@@ -98,4 +98,53 @@ public class ForestManager : MonoBehaviour
             treeCounterText.text = $"Дерево: {treesRemoved}";
         }
     }
+    
+    public Transform GetNearestTree(Vector3 position)
+    {
+        if (treeList.Count == 0)
+        {
+            Debug.Log("ForestManager: No trees left.");
+            return null;
+        }
+
+        GameObject nearestTree = null;
+        float minDistance = float.MaxValue;
+
+        foreach (GameObject tree in treeList)
+        {
+            float distance = Vector3.Distance(position, tree.transform.position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                nearestTree = tree;
+            }
+        }
+
+        Debug.Log($"ForestManager: Nearest tree found at distance {minDistance}.");
+        return nearestTree?.transform;
+    }
+
+    public void RemoveNearestTree(Vector3 position)
+    {
+        Transform nearestTree = GetNearestTree(position);
+        if (nearestTree != null)
+        {
+            Debug.Log($"ForestManager: Removing tree at {nearestTree.position}.");
+            treeList.Remove(nearestTree.gameObject);
+            Destroy(nearestTree.gameObject);
+        }
+    }
+
+    public bool HasTrees()
+    {
+        bool hasTrees = treeList.Count > 0;
+        Debug.Log($"ForestManager: Trees available? {hasTrees}");
+        return hasTrees;
+    }
+
+    public void AddResource()
+    {
+        Debug.Log("ForestManager: Resource added.");
+    }
+
 }

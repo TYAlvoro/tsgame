@@ -98,4 +98,54 @@ public class QuarryManager : MonoBehaviour
             stoneCounterText.text = $"Камень: {stonesExtracted}";
         }
     }
+    
+    public Transform GetNearestQuarry(Vector3 position)
+    {
+        if (quarryList.Count == 0)
+        {
+            Debug.Log("QuarryManager: No quarries left.");
+            return null;
+        }
+
+        GameObject nearestQuarry = null;
+        float minDistance = float.MaxValue;
+
+        foreach (GameObject quarry in quarryList)
+        {
+            float distance = Vector3.Distance(position, quarry.transform.position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                nearestQuarry = quarry;
+            }
+        }
+
+        Debug.Log($"QuarryManager: Nearest quarry found at distance {minDistance}.");
+        return nearestQuarry?.transform;
+    }
+
+    public void RemoveNearestStone(Vector3 position)
+    {
+        Transform nearestQuarry = GetNearestQuarry(position);
+        if (nearestQuarry != null)
+        {
+            Debug.Log($"QuarryManager: Removing stone at {nearestQuarry.position}.");
+            quarryList.Remove(nearestQuarry.gameObject);
+            Destroy(nearestQuarry.gameObject);
+        }
+    }
+
+    public bool HasStones()
+    {
+        bool hasStones = quarryList.Count > 0;
+        Debug.Log($"QuarryManager: Stones available? {hasStones}");
+        return hasStones;
+    }
+
+    public void AddResource()
+    {
+        Debug.Log("QuarryManager: Resource added.");
+    }
+
+
 }
