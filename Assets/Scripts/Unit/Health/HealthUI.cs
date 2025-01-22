@@ -12,8 +12,7 @@ public class HealthUI : MonoBehaviour
 
     [Header("Scaling Configuration")]
     [SerializeField]
-    private AnimationCurve _scaleCurve =
-        AnimationCurve.Linear(0, 1, 1, 0.5f);
+    private AnimationCurve _scaleCurve = AnimationCurve.Linear(0, 1, 1, 0.5f);
 
     private HealthSystem _healthSystem;
     private Camera _mainCamera;
@@ -35,7 +34,21 @@ public class HealthUI : MonoBehaviour
         _visibilityDistance = settings.uiVisibilityDistance;
         _baseScale = settings.uiScale;
 
+        // Подписываемся на изменение здоровья
+        _healthSystem.OnHealthChanged += UpdateHealthValue;
+
+        // Устанавливаем начальное значение
+        UpdateHealthValue(_healthSystem.CurrentHealth / _healthSystem.GetSettings().maxHealth);
+
         gameObject.SetActive(true);
+    }
+
+    private void UpdateHealthValue(float normalizedHealth)
+    {
+        if (_healthSlider != null)
+        {
+            _healthSlider.value = normalizedHealth;
+        }
     }
 
     /// <summary>
@@ -73,5 +86,14 @@ public class HealthUI : MonoBehaviour
         float normalizedDistance = Mathf.Clamp01(distance / _visibilityDistance);
         float scaleModifier = _scaleCurve.Evaluate(normalizedDistance);
         transform.localScale = Vector3.one * _baseScale * scaleModifier;
+    }
+
+    private void OnDestroy()
+    {
+        // Отписываемся от события при уничтожении
+        if (_healthSystem != null)
+        {
+            _healthSystem.OnHealthChanged -= UpdateHealthValue;
+        }
     }
 }
