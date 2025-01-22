@@ -18,7 +18,7 @@ public class HealthSystem : MonoBehaviour
         public float uiVisibilityDistance = 15f;
 
         [Tooltip("Base scale factor for healthbar")]
-        public float uiScale = 0.005f;
+        public float uiScale = 0.05f;
     }
 
     [SerializeField] private Settings _settings;
