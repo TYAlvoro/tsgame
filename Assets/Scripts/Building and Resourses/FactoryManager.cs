@@ -1,42 +1,39 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using UnityEngine.EventSystems;
 
 public class FactoryManager : MonoBehaviour
 {
-    [SerializeField] private GameObject factoryMenu; // Factory menu canvas
-    [SerializeField] private Button startProductionButton; // Start Production button
-    [SerializeField] private UnitProduction unitProduction; // Reference to UnitProduction script
+    [SerializeField] private GameObject factoryMenu; // Меню фабрики
+    [SerializeField] private Button startProductionButton; // Кнопка запуска производства
+    [SerializeField] private TMP_Text productCounterText; // UI элемент для товаров
+    [SerializeField] private TMP_Text stoneCounterText; // UI элемент для камней
+    [SerializeField] private TMP_Text treeCounterText; // UI элемент для деревьев
 
-    private bool isMenuActive = false; // Tracks if the menu is active
+    private int totalProducts = 0; // Общее количество товаров
+    private int storedStones = 0; // Количество камней
+    private int storedTrees = 0; // Количество деревьев
+    private bool isMenuActive = false; // Состояние меню
 
     private void Start()
     {
-        // Ensure menu is initially hidden
-        factoryMenu.SetActive(false);
-
-        // Assign button action
-        startProductionButton.onClick.AddListener(StartProduction);
-        Debug.Log("FactoryManager initialized.");
+        factoryMenu.SetActive(false); // Скрываем меню изначально
+        startProductionButton.onClick.AddListener(StartAllUnits);
+        UpdateUI();
     }
 
     private void Update()
     {
-        // Check if the left mouse button is clicked
+        // Обработка открытия/закрытия меню при клике мыши
         if (Input.GetMouseButtonDown(0))
         {
-            // If the mouse is over a UI element, skip further checks
-            if (EventSystem.current.IsPointerOverGameObject())
-            {
-                return;
-            }
+            if (EventSystem.current.IsPointerOverGameObject()) return;
 
-            // If the mouse is over the factory, open the menu
             if (IsMouseOverFactory())
             {
                 ToggleMenu(true);
             }
-            // If the mouse is not over the factory and the menu is active, close the menu
             else if (isMenuActive)
             {
                 ToggleMenu(false);
@@ -44,58 +41,75 @@ public class FactoryManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Toggles the visibility of the factory menu.
-    /// </summary>
-    /// <param name="show">Whether to show or hide the menu.</param>
-    private void ToggleMenu(bool show)
-    {
-        if (show)
-        {
-            factoryMenu.SetActive(true);
-            isMenuActive = true;
-            Debug.Log("Factory menu opened.");
-        }
-        else
-        {
-            factoryMenu.SetActive(false);
-            isMenuActive = false;
-            Debug.Log("Factory menu closed.");
-        }
-    }
-
-    /// <summary>
-    /// Checks if the mouse is currently over the factory.
-    /// </summary>
-    /// <returns>True if the mouse is over the factory, false otherwise.</returns>
     private bool IsMouseOverFactory()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            bool isOverFactory = hit.collider.gameObject == gameObject;
-            Debug.Log($"Mouse over factory: {isOverFactory}");
-            return isOverFactory;
+            return hit.collider.gameObject == gameObject;
         }
         return false;
     }
 
-    /// <summary>
-    /// Starts the production process.
-    /// </summary>
-    private void StartProduction()
+    private void ToggleMenu(bool show)
     {
-        if (unitProduction != null)
+        factoryMenu.SetActive(show);
+        isMenuActive = show;
+        Debug.Log(show ? "Factory menu opened." : "Factory menu closed.");
+    }
+
+    public void AddStone()
+    {
+        storedStones++;
+        UpdateUI();
+    }
+
+    public void AddTree()
+    {
+        storedTrees++;
+        UpdateUI();
+    }
+
+    public void TryProduceProduct()
+    {
+        if (storedStones > 0 && storedTrees > 0)
         {
-            unitProduction.StartProduction();
-            Debug.Log("Production started.");
+            storedStones--;
+            storedTrees--;
+            totalProducts++;
+            Debug.Log($"FactoryManager: Product produced. Total products: {totalProducts}");
+            UpdateUI();
         }
         else
         {
-            Debug.LogError("UnitProduction reference is not assigned.");
+            Debug.Log("FactoryManager: Not enough resources to produce a product.");
         }
+    }
 
-        // Close the menu after starting production
-        ToggleMenu(false);
+    private void UpdateUI()
+    {
+        if (productCounterText != null)
+        {
+            productCounterText.text = $"Товары: {totalProducts}";
+        }
+        if (stoneCounterText != null)
+        {
+            stoneCounterText.text = $"Камни: {storedStones}";
+        }
+        if (treeCounterText != null)
+        {
+            treeCounterText.text = $"Деревья: {storedTrees}";
+        }
+    }
+
+    private void StartAllUnits()
+    {
+        UnitProduction[] units = FindObjectsOfType<UnitProduction>();
+        foreach (var unit in units)
+        {
+            unit.StartProduction();
+        }
+        Debug.Log("All units started production.");
+        ToggleMenu(false); // Закрыть меню после запуска
     }
 }
