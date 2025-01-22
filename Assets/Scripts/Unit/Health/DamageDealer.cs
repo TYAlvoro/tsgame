@@ -6,73 +6,112 @@ public class DamageDealer : MonoBehaviour
     [System.Serializable]
     public class DamageSettings
     {
+        [Tooltip("Base damage amount applied per attack")]
         public float damageAmount = 10f;
+
+        [Tooltip("Minimum time between consecutive damage applications")]
         public float damageCooldown = 1f;
+
+        [Tooltip("Should damage be applied on physical contact?")]
         public bool damageOnCollision = true;
-        public string[] damagableTags = { "Player", "Enemy" };
+
+        [Tooltip("Tags of objects that can receive damage")]
+        public string[] damageableTags = { "Player", "Enemy" };
     }
 
     [SerializeField] private DamageSettings _settings;
+    [SerializeField] private bool _showDebug = true;
+
     private float _lastDamageTime;
 
-    // Для отладки
-    [SerializeField] private bool _showDebug = true;
+    private void OnCollisionEnter(Collision collision) => HandleContact(collision.gameObject, "Collision");
+    private void OnTriggerEnter(Collider other) => HandleContact(other.gameObject, "Trigger");
 
     public void DealDamage(GameObject target)
     {
-        if (Time.time - _lastDamageTime < _settings.damageCooldown)
+        if (target == null) return;
+
+        if (IsOnCooldown())
         {
-            if (_showDebug) Debug.Log($"Damage cooldown active. Time remaining: {_settings.damageCooldown - (Time.time - _lastDamageTime)}");
+            LogCooldownStatus();
             return;
         }
 
-        var healthSystem = target.GetComponent<HealthSystem>();
-        if (healthSystem != null)
+        if (target.TryGetComponent<HealthSystem>(out var healthSystem))
         {
-            healthSystem.TakeDamage(_settings.damageAmount);
-            _lastDamageTime = Time.time;
-            if (_showDebug) Debug.Log($"Dealt {_settings.damageAmount} damage to {target.name}");
+            ApplyDamage(healthSystem);
+            LogDamageApplied(target.name);
         }
         else
         {
-            if (_showDebug) Debug.LogWarning($"No HealthSystem found on {target.name}");
+            LogMissingHealthSystem(target.name);
         }
+
+        UpdateCooldown();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void HandleContact(GameObject contactTarget, string contactType)
     {
         if (!_settings.damageOnCollision) return;
 
-        if (_showDebug) Debug.Log($"Collision detected with {collision.gameObject.name}");
-
-        if (CanDamage(collision.gameObject))
+        if (_showDebug)
         {
-            DealDamage(collision.gameObject);
+            Debug.Log($"{contactType} detected with {contactTarget.name}");
+        }
+
+        if (CanDamage(contactTarget))
+        {
+            DealDamage(contactTarget);
         }
         else
         {
-            if (_showDebug) Debug.Log($"Cannot damage {collision.gameObject.name}. Invalid tag.");
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!_settings.damageOnCollision) return;
-
-        if (_showDebug) Debug.Log($"Trigger detected with {other.gameObject.name}");
-
-        if (CanDamage(other.gameObject))
-        {
-            DealDamage(other.gameObject);
-        }
-        else
-        {
-            if (_showDebug) Debug.Log($"Cannot damage {other.gameObject.name}. Invalid tag.");
+            LogInvalidTarget(contactTarget.name);
         }
     }
 
     private bool CanDamage(GameObject target)
     {
-        return _settings.damagableTags.Any(tag => target.CompareTag(tag));
+        return target != null &&
+               _settings.damageableTags.Any(tag => target.CompareTag(tag));
+    }
+
+    private bool IsOnCooldown()
+    {
+        return Time.time - _lastDamageTime < _settings.damageCooldown;
+    }
+
+    private void ApplyDamage(HealthSystem healthSystem)
+    {
+        healthSystem.TakeDamage(_settings.damageAmount);
+    }
+
+    private void UpdateCooldown()
+    {
+        _lastDamageTime = Time.time;
+    }
+
+    private void LogCooldownStatus()
+    {
+        if (!_showDebug) return;
+        float remaining = _settings.damageCooldown - (Time.time - _lastDamageTime);
+        Debug.Log($"Damage cooldown active. Time remaining: {remaining:F1}s");
+    }
+
+    private void LogDamageApplied(string targetName)
+    {
+        if (!_showDebug) return;
+        Debug.Log($"Dealt {_settings.damageAmount} damage to {targetName}");
+    }
+
+    private void LogMissingHealthSystem(string targetName)
+    {
+        if (!_showDebug) return;
+        Debug.LogWarning($"No HealthSystem component found on {targetName}");
+    }
+
+    private void LogInvalidTarget(string targetName)
+    {
+        if (!_showDebug) return;
+        Debug.Log($"Cannot damage {targetName}. Invalid tag or missing component.");
     }
 }

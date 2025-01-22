@@ -1,136 +1,195 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 /// <summary>
-/// Manages healthbar pool and positioning using object pooling pattern
+/// Manages creation, recycling, and updating of health UI elements using object pooling
 /// </summary>
 public class HealthUIManager : MonoBehaviour
 {
-    [Header("Configuration")]
+    [Header("Pool Configuration")]
+    [Tooltip("Prefab reference for health UI elements")]
     [SerializeField] private HealthUI _healthUIPrefab;
+
+    [Tooltip("Initial number of UI elements to create in pool")]
     [SerializeField][Min(10)] private int _initialPoolSize = 20;
 
-    private Dictionary<HealthSystem, HealthUI> _activeUI =
+    [Header("Dependencies")]
+    [Tooltip("Container transform for organizing pooled UI elements")]
+    [SerializeField] private Transform _uiContainer;
+
+    private Dictionary<HealthSystem, HealthUI> _activeHealthUIs =
         new Dictionary<HealthSystem, HealthUI>();
-    private Queue<HealthUI> _pool = new Queue<HealthUI>();
-    private Transform _uiContainer;
+    private Queue<HealthUI> _inactivePool = new Queue<HealthUI>();
     private Camera _mainCamera;
 
+    #region Singleton Implementation
     public static HealthUIManager Instance { get; private set; }
 
     private void Awake()
     {
-        if (Instance != null)
+        HandleSingletonInitialization();
+        InitializeCameraReference();
+        CreateUIContainer();
+        WarmObjectPool();
+    }
+
+    private void HandleSingletonInitialization()
+    {
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
-
         Instance = this;
-        UpdateMainCameraReference();
-        InitializeObjectPool();
-        CreateUIContainer();
     }
+    #endregion
 
-    private void CreateUIContainer()
-    {
-        _uiContainer = new GameObject("HealthUIContainer").transform;
-    }
-
-    private void InitializeObjectPool()
+    #region Pool Management
+    private void WarmObjectPool()
     {
         for (int i = 0; i < _initialPoolSize; i++)
         {
-            CreateNewPoolItem();
+            CreateAndStorePoolItem();
         }
     }
 
-    private HealthUI CreateNewPoolItem()
+    private HealthUI CreateAndStorePoolItem()
     {
-        HealthUI ui = Instantiate(_healthUIPrefab, _uiContainer);
-        ui.gameObject.SetActive(false);
-        ui.transform.SetParent(_uiContainer);
-        _pool.Enqueue(ui);
-        return ui;
-    }
-
-    /// <summary>
-    /// Requests healthbar from pool for specific health system
-    /// </summary>
-    public HealthUI GetHealthUI(HealthSystem healthSystem)
-    {
-        if (_activeUI.TryGetValue(healthSystem, out HealthUI ui))
-            return ui;
-
-        if (_pool.Count == 0)
-        {
-            ExpandPool();
-        }
-
-        HealthUI newUI = _pool.Dequeue();
-        newUI.Initialize(healthSystem, _mainCamera);
-        _activeUI.Add(healthSystem, newUI);
+        var newUI = Instantiate(_healthUIPrefab, _uiContainer);
+        newUI.gameObject.SetActive(false);
+        _inactivePool.Enqueue(newUI);
         return newUI;
-    }
-
-    /// <summary>
-    /// Returns healthbar to pool when no longer needed
-    /// </summary>
-    public void ReleaseHealthUI(HealthSystem healthSystem)
-    {
-        if (!_activeUI.TryGetValue(healthSystem, out HealthUI ui)) return;
-
-        ui.gameObject.SetActive(false);
-        ui.transform.SetParent(_uiContainer);
-        _pool.Enqueue(ui);
-        _activeUI.Remove(healthSystem);
     }
 
     private void ExpandPool()
     {
-        int expandAmount = Mathf.Max(5, _initialPoolSize / 4);
-        for (int i = 0; i < expandAmount; i++)
+        int expansionSize = Mathf.Max(5, _initialPoolSize / 4);
+        for (int i = 0; i < expansionSize; i++)
         {
-            CreateNewPoolItem();
+            CreateAndStorePoolItem();
         }
     }
+    #endregion
 
-    private void UpdateMainCameraReference()
+    #region Public Interface
+    /// <summary>
+    /// Retrieves a health UI element for the specified health system
+    /// </summary>
+    /// <param name="healthSystem">Target health system needing UI representation</param>
+    /// <returns>Configured HealthUI component</returns>
+    public HealthUI RequestHealthUI(HealthSystem healthSystem)
     {
-        _mainCamera = Camera.main;
-        if (_mainCamera == null)
+        if (healthSystem == null) return null;
+
+        if (_activeHealthUIs.TryGetValue(healthSystem, out var existingUI))
         {
-            Debug.LogError("[HealthUIManager] Main camera reference is missing!");
+            return existingUI;
         }
+
+        if (_inactivePool.Count == 0)
+        {
+            ExpandPool();
+        }
+
+        var newUI = _inactivePool.Dequeue();
+        ConfigureHealthUI(newUI, healthSystem);
+        return newUI;
     }
 
+    /// <summary>
+    /// Returns a health UI element to the pool when no longer needed
+    /// </summary>
+    /// <param name="healthSystem">Health system associated with the UI element</param>
+    public void ReturnHealthUI(HealthSystem healthSystem)
+    {
+        if (!_activeHealthUIs.TryGetValue(healthSystem, out var ui)) return;
+
+        ResetUIElement(ui);
+        _activeHealthUIs.Remove(healthSystem);
+    }
+    #endregion
+
+    #region UI Configuration
+    private void ConfigureHealthUI(HealthUI ui, HealthSystem healthSystem)
+    {
+        ui.Initialize(healthSystem, _mainCamera);
+        ui.gameObject.SetActive(true);
+        _activeHealthUIs[healthSystem] = ui;
+    }
+
+    private void ResetUIElement(HealthUI ui)
+    {
+        ui.gameObject.SetActive(false);
+        ui.transform.SetParent(_uiContainer);
+        _inactivePool.Enqueue(ui);
+    }
+    #endregion
+
+    #region Frame Updates
     private void LateUpdate()
     {
-        UpdateMainCameraReference();
+        RefreshCameraReference();
+        MaintainActiveElements();
+        UpdateAllUIElements();
+    }
+
+    private void MaintainActiveElements()
+    {
         CleanInvalidReferences();
-        UpdateAllHealthbars();
+        ValidateCameraDependency();
+    }
+
+    private void UpdateAllUIElements()
+    {
+        foreach (var ui in _activeHealthUIs.Values)
+        {
+            ui.UpdateUI();
+        }
+    }
+    #endregion
+
+    #region Reference Management
+    private void CreateUIContainer()
+    {
+        if (_uiContainer == null)
+        {
+            _uiContainer = new GameObject("HealthUIContainer").transform;
+        }
+    }
+
+    private void InitializeCameraReference()
+    {
+        _mainCamera = Camera.main;
+        ValidateCameraDependency();
+    }
+
+    private void RefreshCameraReference()
+    {
+        if (_mainCamera == null)
+        {
+            _mainCamera = Camera.main;
+        }
+    }
+
+    private void ValidateCameraDependency()
+    {
+        if (_mainCamera == null)
+        {
+            Debug.LogError("Main camera reference is missing in HealthUIManager");
+        }
     }
 
     private void CleanInvalidReferences()
     {
-        List<HealthSystem> invalidKeys = new List<HealthSystem>();
-
-        foreach (var pair in _activeUI)
-        {
-            if (pair.Key == null) invalidKeys.Add(pair.Key);
-        }
+        var invalidKeys = _activeHealthUIs.Keys
+            .Where(key => key == null)
+            .ToList();
 
         foreach (var key in invalidKeys)
         {
-            ReleaseHealthUI(key);
+            ReturnHealthUI(key);
         }
     }
-
-    private void UpdateAllHealthbars()
-    {
-        foreach (var pair in _activeUI)
-        {
-            pair.Value.UpdateUI();
-        }
-    }
+    #endregion
 }

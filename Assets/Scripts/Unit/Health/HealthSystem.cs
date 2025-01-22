@@ -52,7 +52,7 @@ public class HealthSystem : MonoBehaviour
             Debug.LogError("[HealthSystem] HealthUIManager instance not found!");
             return;
         }
-        _healthUI = HealthUIManager.Instance.GetHealthUI(this);
+        _healthUI = HealthUIManager.Instance.RequestHealthUI(this);
     }
 
     /// <summary>
@@ -79,7 +79,7 @@ public class HealthSystem : MonoBehaviour
     {
         if (HealthUIManager.Instance != null)
         {
-            HealthUIManager.Instance.ReleaseHealthUI(this);
+            HealthUIManager.Instance.ReturnHealthUI(this);
         }
         OnHealthChanged = null;
         OnDeath = null;
