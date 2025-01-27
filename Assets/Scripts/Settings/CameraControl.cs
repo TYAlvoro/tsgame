@@ -15,6 +15,7 @@ public class CameraControl : MonoBehaviour
     // Rotation speeds.
     public float rotationSpeed = 50f;
     public float mouseRotationSpeed = 2f;
+    public float scrollMultiplier = 100f;
 
     private Vector3 targetPosition; // Target position for smooth movement.
 
@@ -49,9 +50,9 @@ public class CameraControl : MonoBehaviour
         {
             float mouseX = Input.GetAxis("Mouse X");
             float mouseY = Input.GetAxis("Mouse Y");
-            
+
             // Invert mouseX and mouseZ for correct direction.
-            Vector3 mouseMovement = (transform.right * -mouseX + transform.forward * -mouseY) * mouseSensitivity;
+            Vector3 mouseMovement = (transform.right * -mouseX + transform.forward * -mouseY) * mouseSensitivity * Time.deltaTime;
             movement += mouseMovement;
             movement.y = 0;
         }
@@ -65,7 +66,7 @@ public class CameraControl : MonoBehaviour
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         if (scroll != 0)
         {
-            targetPosition.y -= scroll * scrollSpeed * 100f;
+            targetPosition.y -= scroll * scrollSpeed * scrollMultiplier;
             targetPosition.y = Mathf.Clamp(targetPosition.y, minY, maxY); // Clamp Y-axis.
         }
 
