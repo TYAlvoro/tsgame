@@ -1,61 +1,35 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using UnityEngine.EventSystems;
+using System.Collections;
 
 public class FactoryManager : MonoBehaviour
 {
-    [SerializeField] private GameObject factoryMenu; // Меню фабрики
+    [SerializeField] private GameObject factoryMenu; // Панель UI фабрики
     [SerializeField] private Button startProductionButton; // Кнопка запуска производства
-    [SerializeField] private TMP_Text productCounterText; // UI элемент для товаров
-    [SerializeField] private TMP_Text stoneCounterText; // UI элемент для камней
-    [SerializeField] private TMP_Text treeCounterText; // UI элемент для деревьев
+    [SerializeField] private TMP_Text productCounterText; // Счетчик товаров
+    [SerializeField] private TMP_Text stoneCounterText; // Счетчик камней
+    [SerializeField] private TMP_Text treeCounterText; // Счетчик деревьев
 
-    private int totalProducts = 0; // Общее количество товаров
-    private int storedStones = 0; // Количество камней
-    private int storedTrees = 0; // Количество деревьев
-    private bool isMenuActive = false; // Состояние меню
+    private int totalProducts = 0;
+    private int storedStones = 0;
+    private int storedTrees = 0;
 
     private void Start()
     {
-        factoryMenu.SetActive(false); // Скрываем меню изначально
-        startProductionButton.onClick.AddListener(StartAllUnits);
+        factoryMenu.SetActive(false); // Отключаем меню фабрики по умолчанию
+        startProductionButton.onClick.AddListener(StartProductionForAllUnits); // Привязываем метод к кнопке
         UpdateUI();
+        StartCoroutine(ProductionCycle()); // Запускаем производственный цикл
     }
 
-    private void Update()
+    private void OnMouseDown()
     {
-        // Обработка открытия/закрытия меню при клике мыши
-        if (Input.GetMouseButtonDown(0))
+        // Логика для активации UI при клике на фабрику
+        if (factoryMenu != null)
         {
-            if (EventSystem.current.IsPointerOverGameObject()) return;
-
-            if (IsMouseOverFactory())
-            {
-                ToggleMenu(true);
-            }
-            else if (isMenuActive)
-            {
-                ToggleMenu(false);
-            }
+            factoryMenu.SetActive(!factoryMenu.activeSelf);
         }
-    }
-
-    private bool IsMouseOverFactory()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit))
-        {
-            return hit.collider.gameObject == gameObject;
-        }
-        return false;
-    }
-
-    private void ToggleMenu(bool show)
-    {
-        factoryMenu.SetActive(show);
-        isMenuActive = show;
-        Debug.Log(show ? "Factory menu opened." : "Factory menu closed.");
     }
 
     public void AddStone()
@@ -70,19 +44,24 @@ public class FactoryManager : MonoBehaviour
         UpdateUI();
     }
 
-    public void TryProduceProduct()
+    private IEnumerator ProductionCycle()
     {
-        if (storedStones > 0 && storedTrees > 0)
+        while (true)
         {
-            storedStones--;
-            storedTrees--;
-            totalProducts++;
-            Debug.Log($"FactoryManager: Product produced. Total products: {totalProducts}");
-            UpdateUI();
-        }
-        else
-        {
-            Debug.Log("FactoryManager: Not enough resources to produce a product.");
+            yield return new WaitForSeconds(5f); // Цикл повторяется каждые 5 секунд
+
+            if (storedStones > 0 && storedTrees > 0)
+            {
+                storedStones--;
+                storedTrees--;
+                totalProducts++;
+                Debug.Log($"FactoryManager: Product produced. Total products: {totalProducts}");
+                UpdateUI();
+            }
+            else
+            {
+                Debug.Log("FactoryManager: Not enough resources to produce a product.");
+            }
         }
     }
 
@@ -102,14 +81,15 @@ public class FactoryManager : MonoBehaviour
         }
     }
 
-    private void StartAllUnits()
+    private void StartProductionForAllUnits()
     {
-        UnitProduction[] units = FindObjectsOfType<UnitProduction>();
-        foreach (var unit in units)
+        var productionUnits = FindObjectsOfType<ProductionUnit>();
+        foreach (var unit in productionUnits)
         {
-            unit.StartProduction();
+            unit.PerformAction(); // Запуск цикла производства у юнитов
         }
-        Debug.Log("All units started production.");
-        ToggleMenu(false); // Закрыть меню после запуска
+
+        Debug.Log("FactoryManager: All production units started.");
+        factoryMenu.SetActive(false); // Скрываем меню после запуска
     }
 }
