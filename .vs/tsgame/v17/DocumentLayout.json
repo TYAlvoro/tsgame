@@ -3,15 +3,15 @@
   "WorkspaceRootPath": "C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\assets\\scripts\\unit\\health\\healthuimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\unit\\health\\healthuimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\assets\\scripts\\settings\\daynightcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\settings\\daynightcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|c:\\users\\dell\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\tsgame\\.git\\tsgame\\assets\\scripts\\chunk\\chankmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\Assets\\Scripts\\Unit\\Health\\HealthUIManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Unit\\Health\\HealthUIManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\assets\\scripts\\chunk\\chankmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\chunk\\chankmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -19,24 +19,24 @@
       "RelativeMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\building and resourses\\buildingplacement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\assets\\scripts\\unit\\unitmovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\unit\\unitmovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\assets\\scripts\\settings\\cameracontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\settings\\cameracontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\assets\\scripts\\unit\\health\\healthsystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\unit\\health\\healthsystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\Assets\\Scripts\\Unit\\UnitMovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Unit\\UnitMovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\assets\\scripts\\unit\\health\\damagedealer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\unit\\health\\damagedealer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\Assets\\Scripts\\Unit\\Health\\DamageDealer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Unit\\Health\\DamageDealer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\assets\\scripts\\unit\\health\\healthui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\unit\\health\\healthui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\Assets\\Scripts\\Unit\\Health\\HealthSystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Unit\\Health\\HealthSystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\Assets\\Scripts\\Unit\\Health\\HealthUI.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Unit\\Health\\HealthUI.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,7 +46,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
@@ -58,8 +58,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Chunk\\ChankManager.cs",
               "ViewState": "AgIAABoAAAAAAAAAAAAYwDEAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-29T17:09:30.461Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-29T17:09:30.461Z"
             },
             {
               "$type": "Document",
@@ -75,7 +74,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "UnitMovement.cs",
               "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\Assets\\Scripts\\Unit\\UnitMovement.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Unit\\UnitMovement.cs",
@@ -87,20 +86,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "DayNightController.cs",
               "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\Assets\\Scripts\\Settings\\DayNightController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Settings\\DayNightController.cs",
               "ToolTip": "C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\Assets\\Scripts\\Settings\\DayNightController.cs",
               "RelativeToolTip": "Assets\\Scripts\\Settings\\DayNightController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAABOAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAWwBYAAABOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-25T05:14:04.918Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "CameraControl.cs",
               "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\Assets\\Scripts\\Settings\\CameraControl.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Settings\\CameraControl.cs",
@@ -112,7 +111,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 6,
               "Title": "DamageDealer.cs",
               "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\Assets\\Scripts\\Unit\\Health\\DamageDealer.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Unit\\Health\\DamageDealer.cs",
@@ -124,7 +123,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "HealthSystem.cs",
               "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\Assets\\Scripts\\Unit\\Health\\HealthSystem.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Unit\\Health\\HealthSystem.cs",
@@ -148,16 +147,14 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "HealthUIManager.cs",
               "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\Assets\\Scripts\\Unit\\Health\\HealthUIManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Unit\\Health\\HealthUIManager.cs",
               "ToolTip": "C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\Assets\\Scripts\\Unit\\Health\\HealthUIManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\Unit\\Health\\HealthUIManager.cs",
-              "ViewState": "AgIAABoAAAAAAAAAAAA3wMIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-21T18:19:56.918Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-21T18:19:56.918Z"
             }
           ]
         }
