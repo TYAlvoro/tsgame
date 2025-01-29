@@ -3,19 +3,23 @@
   "WorkspaceRootPath": "C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|c:\\users\\dell\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\tsgame\\.git\\tsgame\\assets\\scripts\\chunk\\chankmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\chunk\\chankmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|c:\\users\\dell\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\tsgame\\.git\\tsgame\\assets\\scripts\\building and resourses\\buildingplacement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\building and resourses\\buildingplacement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|c:\\users\\dell\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\tsgame\\.git\\tsgame\\assets\\scripts\\unit\\unitmovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\assets\\scripts\\unit\\unitmovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\unit\\unitmovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|c:\\users\\dell\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\tsgame\\.git\\tsgame\\assets\\scripts\\settings\\daynightcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\assets\\scripts\\settings\\daynightcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\settings\\daynightcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|c:\\users\\dell\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\tsgame\\.git\\tsgame\\assets\\scripts\\settings\\cameracontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\assets\\scripts\\settings\\cameracontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{999406FF-6C9D-B073-57F8-5EDE2B599182}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\settings\\cameracontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -47,6 +51,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "ChankManager.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\Assets\\Scripts\\Chunk\\ChankManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Chunk\\ChankManager.cs",
+              "ToolTip": "C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\Assets\\Scripts\\Chunk\\ChankManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Chunk\\ChankManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-29T17:09:30.461Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "BuildingPlacement.cs",
               "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\Assets\\Scripts\\Building and Resourses\\BuildingPlacement.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Building and Resourses\\BuildingPlacement.cs",
@@ -59,7 +76,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "UnitMovement.cs",
               "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\Assets\\Scripts\\Unit\\UnitMovement.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Unit\\UnitMovement.cs",
@@ -67,12 +84,11 @@
               "RelativeToolTip": "Assets\\Scripts\\Unit\\UnitMovement.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-25T05:24:40.98Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-25T05:24:40.98Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "DayNightController.cs",
               "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\Assets\\Scripts\\Settings\\DayNightController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Settings\\DayNightController.cs",
@@ -80,12 +96,11 @@
               "RelativeToolTip": "Assets\\Scripts\\Settings\\DayNightController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-25T05:14:04.918Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-25T05:14:04.918Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "CameraControl.cs",
               "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\Assets\\Scripts\\Settings\\CameraControl.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Settings\\CameraControl.cs",
@@ -93,12 +108,11 @@
               "RelativeToolTip": "Assets\\Scripts\\Settings\\CameraControl.cs",
               "ViewState": "AgIAAB4AAAAAAAAAAAAowA4AAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-25T05:01:16.545Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-25T05:01:16.545Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "DamageDealer.cs",
               "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\Assets\\Scripts\\Unit\\Health\\DamageDealer.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Unit\\Health\\DamageDealer.cs",
@@ -110,7 +124,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "HealthSystem.cs",
               "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\Assets\\Scripts\\Unit\\Health\\HealthSystem.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Unit\\Health\\HealthSystem.cs",
@@ -122,7 +136,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "HealthUI.cs",
               "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\Assets\\Scripts\\Unit\\Health\\HealthUI.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Unit\\Health\\HealthUI.cs",
@@ -134,7 +148,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "HealthUIManager.cs",
               "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\tsgame\\.git\\tsgame\\Assets\\Scripts\\Unit\\Health\\HealthUIManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Unit\\Health\\HealthUIManager.cs",

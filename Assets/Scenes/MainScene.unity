@@ -60593,7 +60593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 792691369e2c95041a38208534266211, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 0}
+  _animator: {fileID: 1275347328}
   _minSpeed: 0.1
   _maxSpeed: 5
   _speedChangeStep: 0.5
