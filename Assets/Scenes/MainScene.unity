@@ -1672,7 +1672,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7809894778327208225, guid: 42a6bba132735e6468d123850efe5d39, type: 3}
+    - {fileID: 1546185133148409532, guid: 42a6bba132735e6468d123850efe5d39, type: 3}
+    - {fileID: 4386165361862185611, guid: 42a6bba132735e6468d123850efe5d39, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -17147,7 +17150,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4646741142873419579, guid: c759a0e1be028c14f814051745d7190d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1614106027}
   m_SourcePrefab: {fileID: 100100000, guid: c759a0e1be028c14f814051745d7190d, type: 3}
 --- !u!1 &419639414
 GameObject:
@@ -75435,6 +75441,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Unit (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4646741142873419579, guid: c759a0e1be028c14f814051745d7190d, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -76840,6 +76850,49 @@ LODGroup:
     renderers:
     - renderer: {fileID: 647447497}
   m_Enabled: 1
+--- !u!1 &1614106017 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4646741142873419579, guid: c759a0e1be028c14f814051745d7190d, type: 3}
+  m_PrefabInstance: {fileID: 418837530}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1614106027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614106017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c2a45826d01634482e2762991f16e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthSlider: {fileID: 0}
+  _canvasGroup: {fileID: 0}
+  _scaleCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -0.5
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0.5
+      inSlope: -0.5
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1615080916
 GameObject:
   m_ObjectHideFlags: 0

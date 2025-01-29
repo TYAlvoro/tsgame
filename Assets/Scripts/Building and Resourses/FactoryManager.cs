@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class FactoryManager : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class FactoryManager : MonoBehaviour
         factoryMenu.SetActive(false); // Отключаем меню фабрики по умолчанию
         startProductionButton.onClick.AddListener(StartProductionForAllUnits); // Привязываем метод к кнопке
         UpdateUI();
+        StartCoroutine(ProductionCycle()); // Запускаем производственный цикл
     }
 
     private void OnMouseDown()
@@ -42,19 +44,24 @@ public class FactoryManager : MonoBehaviour
         UpdateUI();
     }
 
-    public void TryProduceProduct()
+    private IEnumerator ProductionCycle()
     {
-        if (storedStones > 0 && storedTrees > 0)
+        while (true)
         {
-            storedStones--;
-            storedTrees--;
-            totalProducts++;
-            Debug.Log($"FactoryManager: Product produced. Total products: {totalProducts}");
-            UpdateUI();
-        }
-        else
-        {
-            Debug.Log("FactoryManager: Not enough resources to produce a product.");
+            yield return new WaitForSeconds(5f); // Цикл повторяется каждые 5 секунд
+
+            if (storedStones > 0 && storedTrees > 0)
+            {
+                storedStones--;
+                storedTrees--;
+                totalProducts++;
+                Debug.Log($"FactoryManager: Product produced. Total products: {totalProducts}");
+                UpdateUI();
+            }
+            else
+            {
+                Debug.Log("FactoryManager: Not enough resources to produce a product.");
+            }
         }
     }
 
