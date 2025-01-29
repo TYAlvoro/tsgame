@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 7681687383384488554}
   - component: {fileID: 4021596731541563198}
   - component: {fileID: 4134620531825625627}
+  - component: {fileID: -5732744160553030248}
   m_Layer: 6
-  m_Name: MainTerrain
+  m_Name: Terrain_(0.00, 0.00, 0.00)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -126,3 +127,17 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 46a47242b95ceab4fada4a193bf4c4a1, type: 2}
   m_BuildHeightMesh: 0
+--- !u!114 &-5732744160553030248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6594870228189344747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f9cc80b12a98544ca2e2e93e26cb3b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chunkCoordinates: {x: 0, y: 0}
+  isActive: 0

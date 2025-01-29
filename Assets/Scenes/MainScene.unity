@@ -18760,7 +18760,7 @@ Transform:
   m_GameObject: {fileID: 427278620}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 141.10924, y: 51.5899, z: 121.08031}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -50616,11 +50616,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1072264947}
   m_Mesh: {fileID: 13864149661187147, guid: fc8ec91f9ed53ab4b8302d063cc89ae6, type: 3}
---- !u!218 &1072699334 stripped
-Terrain:
-  m_CorrespondingSourceObject: {fileID: 7681687383384488554, guid: c28a20d311387ac48a9cb30da7fd8e3d, type: 3}
-  m_PrefabInstance: {fileID: 446270673565138622}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1073158780
 GameObject:
   m_ObjectHideFlags: 0
@@ -76818,7 +76813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   treePrefab: {fileID: 299712424454941021, guid: 022485ff60e4a26418217d8ab778a812, type: 3}
-  terrain: {fileID: 1072699334}
+  terrain: {fileID: 0}
   numberOfTrees: 150
   generationAreaCenter: {x: 300, y: 0, z: 200}
   generationAreaSize: {x: 50, y: 0, z: 50}
@@ -82955,7 +82950,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   quarryPrefab: {fileID: 5401644349759558686, guid: 82c93d3bde6e94ca69b355bc2ab0959c, type: 3}
-  terrain: {fileID: 1072699334}
+  terrain: {fileID: 0}
   numberOfQuarries: 300
   generationAreaCenter: {x: 150, y: 0, z: 200}
   generationAreaSize: {x: 50, y: 0, z: 50}
@@ -104325,70 +104320,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2146852253}
   m_Mesh: {fileID: 2382598983503447226, guid: 419b474d3d31ef54e9c101d6e7213aee, type: 3}
---- !u!1001 &446270673565138622
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 467386602991505436, guid: c28a20d311387ac48a9cb30da7fd8e3d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 467386602991505436, guid: c28a20d311387ac48a9cb30da7fd8e3d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 467386602991505436, guid: c28a20d311387ac48a9cb30da7fd8e3d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 467386602991505436, guid: c28a20d311387ac48a9cb30da7fd8e3d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 467386602991505436, guid: c28a20d311387ac48a9cb30da7fd8e3d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 467386602991505436, guid: c28a20d311387ac48a9cb30da7fd8e3d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 467386602991505436, guid: c28a20d311387ac48a9cb30da7fd8e3d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 467386602991505436, guid: c28a20d311387ac48a9cb30da7fd8e3d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 467386602991505436, guid: c28a20d311387ac48a9cb30da7fd8e3d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 467386602991505436, guid: c28a20d311387ac48a9cb30da7fd8e3d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6594870228189344747, guid: c28a20d311387ac48a9cb30da7fd8e3d, type: 3}
-      propertyPath: m_Name
-      value: MainTerrain
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: c28a20d311387ac48a9cb30da7fd8e3d, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1837476104}
   - {fileID: 1275347326}
-  - {fileID: 446270673565138622}
   - {fileID: 1002190607}
   - {fileID: 61622148}
   - {fileID: 1643679813}
