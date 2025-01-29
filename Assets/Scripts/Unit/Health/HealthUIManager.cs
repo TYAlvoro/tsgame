@@ -183,7 +183,7 @@ public class HealthUIManager : MonoBehaviour
     private void CleanInvalidReferences()
     {
         var invalidKeys = _activeHealthUIs.Keys
-            .Where(key => key == null)
+            .Where(key => key == null || key.gameObject == null)
             .ToList();
 
         foreach (var key in invalidKeys)

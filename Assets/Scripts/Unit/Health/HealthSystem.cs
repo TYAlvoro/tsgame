@@ -61,12 +61,16 @@ public class HealthSystem : MonoBehaviour
     /// <param name="damage">Damage amount</param>
     public void TakeDamage(float damage)
     {
+        if (damage <= 0) return; // Prevent negative or zero damage
         if (CurrentHealth <= 0) return;
 
         CurrentHealth = Mathf.Max(0, CurrentHealth - damage);
         OnHealthChanged?.Invoke(CurrentHealth / _settings.maxHealth);
 
-        if (CurrentHealth <= 0) Die();
+        if (CurrentHealth <= 0)
+        {
+            Die();
+        }
     }
 
     private void Die()

@@ -90,7 +90,13 @@ public class HealthUI : MonoBehaviour
 
     private void UpdateVisibility()
     {
-        _canvasGroup.alpha = IsWithinVisibilityRange() ? 1 : 0;
+        if (!IsWithinVisibilityRange())
+        {
+            _canvasGroup.alpha = 0;
+            return;
+        }
+
+        _canvasGroup.alpha = 1;
     }
 
     private void UpdateScale()
