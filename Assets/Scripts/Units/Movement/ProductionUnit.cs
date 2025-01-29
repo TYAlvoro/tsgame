@@ -9,6 +9,8 @@ public class ProductionUnit : BaseUnit
     public FactoryManager factoryManager;
 
     private bool isProducing = false; // Флаг состояния производства
+    [SerializeField] private float gatherTime = 2f; // Время на сбор ресурса
+    [SerializeField] private float deliveryTime = 2f; // Время на доставку ресурса на фабрику
 
     public override void PerformAction()
     {
@@ -67,6 +69,9 @@ public class ProductionUnit : BaseUnit
         agent.SetDestination(target.position);
         yield return new WaitUntil(() => HasReachedTarget());
 
+        // Имитация времени на сбор ресурса
+        yield return new WaitForSeconds(gatherTime);
+
         resourceManager.RemoveResource(transform.position);
         Debug.Log($"{name} collected resource from {resourceManager.GetType().Name}.");
     }
@@ -75,6 +80,9 @@ public class ProductionUnit : BaseUnit
     {
         agent.SetDestination(factoryManager.transform.position);
         yield return new WaitUntil(() => HasReachedTarget());
+
+        // Имитация времени на доставку ресурса
+        yield return new WaitForSeconds(deliveryTime);
 
         if (resourceType == "Камни")
         {
