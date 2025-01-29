@@ -1,105 +1,31 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class QuarryManager : MonoBehaviour
-{ 
-    public GameObject quarryRoot; // Parent object containing all quarries.
-    public TMP_Text stoneCounterText; // Optional: UI element for displaying stone count.
+public class QuarryManager : ResourceManagerBase
+{
+    [SerializeField] private GameObject quarryRoot; // Родительский объект для всех каменоломен
 
-    private List<GameObject> quarryList = new List<GameObject>(); // List of quarries in the area.
-    private int stonesExtracted = 0; // Counter for extracted stones.
+    private int stonesProcessed = 0;
 
-    void Start()
+    private void Start()
     {
-        // Initialize the list of quarries from the quarryRoot's children.
+        InitializeResources();
+    }
+
+    private void InitializeResources()
+    {
+        resources.Clear();
         foreach (Transform child in quarryRoot.transform)
         {
-            if (!quarryList.Contains(child.gameObject))
-            {
-                quarryList.Add(child.gameObject);
-            }
+            resources.Add(child.gameObject);
         }
+
+        Debug.Log($"QuarryManager: Initialized with {resources.Count} stones.");
     }
 
-    /// <summary>
-    /// Resets the quarry to its initial state.
-    /// </summary>
-    public void ResetQuarry()
+    public override void AddResource()
     {
-        // Destroy all remaining stones.
-        foreach (GameObject stone in quarryList)
-        {
-            Destroy(stone);
-        }
-        quarryList.Clear();
-
-        // Reinitialize the quarry with the original stones.
-        foreach (Transform child in quarryRoot.transform)
-        {
-            GameObject newStone = Instantiate(child.gameObject, child.position, child.rotation, quarryRoot.transform);
-            quarryList.Add(newStone);
-        }
-
-        // Reset counters and update UI.
-        stonesExtracted = 0;
-        if (stoneCounterText != null)
-        {
-            stoneCounterText.text = $"Камень: {stonesExtracted}";
-        }
-    }
-    
-    public Transform GetNearestQuarry(Vector3 position)
-    {
-        if (quarryList.Count == 0)
-        {
-            Debug.Log("QuarryManager: No quarries left.");
-            return null;
-        }
-
-        GameObject nearestQuarry = null;
-        float minDistance = float.MaxValue;
-
-        foreach (GameObject quarry in quarryList)
-        {
-            float distance = Vector3.Distance(position, quarry.transform.position);
-            if (distance < minDistance)
-            {
-                minDistance = distance;
-                nearestQuarry = quarry;
-            }
-        }
-
-        Debug.Log($"QuarryManager: Nearest quarry found at distance {minDistance}.");
-        return nearestQuarry?.transform;
-    }
-
-    public void RemoveNearestStone(Vector3 position)
-    {
-        Transform nearestQuarry = GetNearestQuarry(position);
-        if (nearestQuarry != null)
-        {
-            Debug.Log($"QuarryManager: Removing stone at {nearestQuarry.position}.");
-            quarryList.Remove(nearestQuarry.gameObject);
-            Destroy(nearestQuarry.gameObject);
-        }
-    }
-
-    public bool HasStones()
-    {
-        bool hasStones = quarryList.Count > 0;
-        Debug.Log($"QuarryManager: Stones available? {hasStones}");
-        return hasStones;
-    }
-    
-    public void AddResource()
-    {
-        stonesExtracted++;
-        Debug.Log($"QuarryManager: Stone delivered. Total stones processed: {stonesExtracted}");
-        if (stoneCounterText != null)
-        {
-            stoneCounterText.text = $"Камень: {stonesExtracted}";
-        }
+        stonesProcessed++;
     }
 }

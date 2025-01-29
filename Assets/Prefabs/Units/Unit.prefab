@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 3105167664816870898}
   - component: {fileID: 6238026568615878279}
   - component: {fileID: 9137708830726732261}
-  - component: {fileID: 8131143589000440970}
-  - component: {fileID: 5161754699657773112}
-  - component: {fileID: 6328803060598423062}
   - component: {fileID: -3424186629686188242}
+  - component: {fileID: 5012826355729511114}
+  - component: {fileID: -8744691461089623088}
+  - component: {fileID: -6178882033227431604}
   m_Layer: 0
   m_Name: Unit
   m_TagString: Untagged
@@ -137,51 +137,6 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &8131143589000440970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4646741142873419579}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf2ce14643fd11644adb05bb7683cfb6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 9137708830726732261}
---- !u!114 &5161754699657773112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4646741142873419579}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da574d9b3f60238439abbd8ae752aca0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6328803060598423062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4646741142873419579}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a61a463b418bd4ba980b802f53215afc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  factory: {fileID: 0}
-  forestManager: {fileID: 0}
-  quarryManager: {fileID: 0}
-  productCounterText: {fileID: 0}
-  stoneCounterText: {fileID: 0}
-  treeCounterText: {fileID: 0}
-  waitTime: 3
-  conversionDelay: 2
 --- !u!114 &-3424186629686188242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,3 +154,41 @@ MonoBehaviour:
     uiOffset: {x: 0, y: 2, z: 0}
     uiVisibilityDistance: 150
     uiScale: 0.05
+--- !u!114 &5012826355729511114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4646741142873419579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 766f8343e63354aa59f2ab54b8be3d4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  factoryManager: {fileID: 0}
+--- !u!114 &-8744691461089623088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4646741142873419579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 817fd0bbe0f304499a2e50971647df8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedColor: {r: 0, g: 1, b: 0, a: 1}
+--- !u!114 &-6178882033227431604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4646741142873419579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b19ba3b49e3fb4dbda8496aff2c0ec65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
