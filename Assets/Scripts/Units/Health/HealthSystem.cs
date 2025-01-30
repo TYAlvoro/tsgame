@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -10,33 +11,20 @@ public class HealthSystem : MonoBehaviour
     {
         [Tooltip("Maximum health points")]
         public float maxHealth = 100f;
-
         [Tooltip("Healthbar position offset from entity")]
         public Vector3 uiOffset = new Vector3(0, 2f, 0);
-
         [Tooltip("Maximum visibility distance for healthbar")]
         public float uiVisibilityDistance = 15f;
-
         [Tooltip("Base scale factor for healthbar")]
         public float uiScale = 0.05f;
     }
 
     [SerializeField] private Settings _settings;
-
-    /// <summary> Current health value </summary>
     public float CurrentHealth { get; private set; }
-
-    /// <summary> Called when health changes (0-1 normalized value) </summary>
-    public event System.Action<float> OnHealthChanged;
-
-    /// <summary> Called when health reaches zero </summary>
-    public event System.Action OnDeath;
-
+    public event Action<float> OnHealthChanged;
+    public event Action OnDeath;
     private HealthUI _healthUI;
 
-    /// <summary>
-    /// Returns current settings configuration
-    /// </summary>
     public Settings GetSettings() => _settings;
 
     private void Start()
@@ -59,17 +47,36 @@ public class HealthSystem : MonoBehaviour
     /// Applies damage to the entity
     /// </summary>
     /// <param name="damage">Damage amount</param>
-    public void TakeDamage(float damage)
+    /// <param name="damageType">Type of damage</param>
+    public void TakeDamage(float damage, DamageType damageType)
     {
-        if (damage <= 0) return; // Prevent negative or zero damage
-        if (CurrentHealth <= 0) return;
+        if (damage <= 0 || CurrentHealth <= 0) return;
 
-        CurrentHealth = Mathf.Max(0, CurrentHealth - damage);
+        // Apply resistance or vulnerability based on damage type
+        float effectiveDamage = ApplyDamageModifiers(damage, damageType);
+
+        CurrentHealth = Mathf.Max(0, CurrentHealth - effectiveDamage);
         OnHealthChanged?.Invoke(CurrentHealth / _settings.maxHealth);
 
         if (CurrentHealth <= 0)
         {
             Die();
+        }
+    }
+
+    private float ApplyDamageModifiers(float damage, DamageType damageType)
+    {
+        // Example: Apply resistance or vulnerability based on damage type
+        switch (damageType)
+        {
+            case DamageType.Physical:
+                return damage * 1.0f; // No modifier
+            case DamageType.Fire:
+                return damage * 1.2f; // Vulnerable to fire
+            case DamageType.Magic:
+                return damage * 0.8f; // Resistant to magic
+            default:
+                return damage;
         }
     }
 
@@ -88,4 +95,15 @@ public class HealthSystem : MonoBehaviour
         OnHealthChanged = null;
         OnDeath = null;
     }
+}
+
+/// <summary>
+/// Represents different types of damage
+/// </summary>
+public enum DamageType
+{
+    Physical,
+    Fire,
+    Magic,
+    Poison
 }
