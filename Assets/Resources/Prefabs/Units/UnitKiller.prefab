@@ -13,9 +13,8 @@ GameObject:
   - component: {fileID: 8957433910481334408}
   - component: {fileID: 6873775864932218694}
   - component: {fileID: 8336076549602675961}
-  - component: {fileID: 7809894778327208225}
-  - component: {fileID: 1546185133148409532}
-  - component: {fileID: 4386165361862185611}
+  - component: {fileID: 4634454414024944246}
+  - component: {fileID: 2453386471666970766}
   - component: {fileID: 7141312656245899319}
   - component: {fileID: 237789885161077004}
   - component: {fileID: 4558919039024070417}
@@ -139,7 +138,7 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &7809894778327208225
+--- !u!114 &4634454414024944246
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,11 +147,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 781843297691172156}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf2ce14643fd11644adb05bb7683cfb6, type: 3}
+  m_Script: {fileID: 11500000, guid: b19ba3b49e3fb4dbda8496aff2c0ec65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 8336076549602675961}
---- !u!114 &1546185133148409532
+--- !u!114 &2453386471666970766
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,29 +159,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 781843297691172156}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da574d9b3f60238439abbd8ae752aca0, type: 3}
+  m_Script: {fileID: 11500000, guid: 817fd0bbe0f304499a2e50971647df8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4386165361862185611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 781843297691172156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a61a463b418bd4ba980b802f53215afc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  factory: {fileID: 0}
-  forestManager: {fileID: 0}
-  quarryManager: {fileID: 0}
-  productCounterText: {fileID: 0}
-  stoneCounterText: {fileID: 0}
-  treeCounterText: {fileID: 0}
-  waitTime: 3
-  conversionDelay: 2
+  selectedColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!114 &7141312656245899319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,7 +196,8 @@ MonoBehaviour:
     damageAmount: 10
     damageCooldown: 1
     damageOnCollision: 1
-    damagableTags:
+    damageableTags:
+    - Player
     - Enemy
   _showDebug: 1
 --- !u!54 &4558919039024070417
